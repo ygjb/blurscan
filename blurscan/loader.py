@@ -74,3 +74,14 @@ register_loader(
     (".jpg", ".jpeg", ".png", ".tif", ".tiff", ".bmp", ".webp"),
     _load_with_pillow,
 )
+
+
+def _register_heif() -> None:
+    """Register the HEIF/HEIC opener so Pillow can decode iPhone images."""
+    import pillow_heif
+
+    pillow_heif.register_heif_opener()
+    register_loader((".heic", ".heif"), _load_with_pillow)
+
+
+_register_heif()
