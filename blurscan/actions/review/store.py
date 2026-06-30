@@ -8,6 +8,7 @@ resumable — closing and reopening restores prior Keep/Quarantine/Tag choices.
 from __future__ import annotations
 
 import sqlite3
+import threading
 from pathlib import Path
 from types import TracebackType
 
@@ -25,20 +26,27 @@ class DecisionStore:
     def __init__(self, db_path: Path | str) -> None:
         self.db_path = Path(db_path)
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        self.conn = sqlite3.connect(str(self.db_path))
+        # The review server creates the store on the main thread but werkzeug
+        # serves requests on another thread, so the connection must not be
+        # pinned to its creating thread. Requests are serialized on the single
+        # server thread; the lock guards against any future threaded serving.
+        self.conn = sqlite3.connect(str(self.db_path), check_same_thread=False)
+        self._lock = threading.Lock()
         self.conn.execute(_SCHEMA)
         self.conn.commit()
 
     def load(self) -> dict[str, str]:
-        rows = self.conn.execute("SELECT path, decision FROM decisions").fetchall()
+        with self._lock:
+            rows = self.conn.execute("SELECT path, decision FROM decisions").fetchall()
         return {path: decision for path, decision in rows}
 
     def set(self, path: str, decision: str) -> None:
-        self.conn.execute(
-            "INSERT OR REPLACE INTO decisions (path, decision) VALUES (?, ?)",
-            (path, decision),
-        )
-        self.conn.commit()
+        with self._lock:
+            self.conn.execute(
+                "INSERT OR REPLACE INTO decisions (path, decision) VALUES (?, ?)",
+                (path, decision),
+            )
+            self.conn.commit()
 
     def close(self) -> None:
         self.conn.close()
