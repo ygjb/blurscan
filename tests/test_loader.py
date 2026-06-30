@@ -63,4 +63,4 @@ def test_corrupt_file_raises(tmp_path: Path) -> None:
 def test_registry_helpers() -> None:
     assert ".png" in supported_extensions()
     assert is_supported("a.JPG")  # case-insensitive
-    assert not is_supported("a.heic")  # not registered until the HEIC issue
+    assert not is_supported("a.xyz")  # unknown extension stays unsupported
