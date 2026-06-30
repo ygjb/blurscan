@@ -38,6 +38,7 @@ include = ["blurscan*"]
 
 [tool.setuptools.package-data]
 "blurscan.detectors" = ["*.npz"]
+"blurscan.actions.review" = ["static/*"]
 
 [tool.ruff]
 line-length = 100
