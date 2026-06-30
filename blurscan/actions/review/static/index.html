@@ -4,26 +4,45 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>blurscan review</title>
-  <style>
-    body { font: 14px system-ui, sans-serif; margin: 2rem; color: #1f2328; }
-    code { background: #eaeef2; padding: 1px 5px; border-radius: 4px; }
-  </style>
+  <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-  <h1>blurscan review</h1>
-  <p>Server is running. The interactive gallery UI lands in issue #16.</p>
-  <p>API: <code>GET /api/results</code> · <code>/api/thumb/&lt;id&gt;</code> ·
-     <code>/api/image/&lt;id&gt;</code> · <code>POST /api/decision</code> ·
-     <code>/api/apply</code> · <code>/api/shutdown</code></p>
-  <pre id="summary">loading…</pre>
-  <script>
-    fetch('/api/results').then(r => r.json()).then(d => {
-      const counts = {};
-      for (const it of d.items) counts[it.classification] = (counts[it.classification] || 0) + 1;
-      document.getElementById('summary').textContent =
-        `${d.items.length} images — ` + JSON.stringify(counts) +
-        (d.dry_run ? '  (dry-run)' : '');
-    });
-  </script>
+  <header>
+    <h1>blurscan review</h1>
+    <div class="controls">
+      <label>Show
+        <select id="filter">
+          <option value="flagged">blurry + borderline</option>
+          <option value="blurry">blurry</option>
+          <option value="borderline">borderline</option>
+          <option value="all">all</option>
+        </select>
+      </label>
+      <span id="counts" class="counts"></span>
+      <span id="dryrun" class="dryrun" hidden>dry-run</span>
+      <button id="apply">Apply decisions</button>
+      <button id="done" class="secondary">Done</button>
+    </div>
+  </header>
+
+  <main id="grid" class="grid" aria-label="image gallery"></main>
+
+  <div id="detail" class="detail" hidden>
+    <div class="detail-body">
+      <img id="detail-img" alt="">
+      <aside class="detail-meta">
+        <h2 id="detail-name"></h2>
+        <dl id="detail-stats"></dl>
+        <div class="decision-buttons">
+          <button data-decision="keep">Keep (k)</button>
+          <button data-decision="quarantine">Quarantine (x)</button>
+          <button data-decision="tag">Tag (t)</button>
+        </div>
+        <p class="hint">← → navigate · Esc close</p>
+      </aside>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
 </body>
 </html>
