@@ -34,13 +34,15 @@ those require explicit human approval (see below).
 7. Move to the next eligible issue without waiting for the merge (CI runs async).
    - If CI fails, fix forward on the same branch; do not start dependent issues until it merges.
 
-## Security gate (the only approval stop)
-Issues labeled `security` (currently **#12 exiftool subprocess**, **#15 Flask review server**)
-are **never implemented autonomously**. When one becomes the next eligible issue:
-- **skip it**, continue with later non-security issues whose dependencies are met
-  ("skip ahead, circle back"),
-- and surface it to the human for explicit approval before it is built.
-Dependents of a skipped security issue wait until it is approved, built, and merged.
+## Security gate — APPROVED (2026-06-29)
+The maintainer granted standing approval to build the `security`-labeled issues
+(**#12 exiftool subprocess**, **#15 Flask review server**) autonomously, and wants the
+loop to run continuously overnight. **Do NOT pause at the security gate.** Build #12/#15
+in dependency order like any other issue, with extra care on the flagged concerns
+(subprocess arg handling for #12; path-traversal / CSRF / 127.0.0.1 binding for #15).
+
+A **dedicated security review pass** runs AFTER all build-loop issues are complete
+(e.g. `/security-review` over the merged work), then report findings.
 
 ## Stop conditions
 - Backlog empty (all `build-loop` issues closed) → report completion.
