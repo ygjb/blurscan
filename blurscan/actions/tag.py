@@ -47,7 +47,19 @@ class ExiftoolCommand:
     targets: list[Path] = field(default_factory=list)
 
     def argv(self, exiftool: str = "exiftool") -> list[str]:
-        return [exiftool, *self.args, *(str(t) for t in self.targets)]
+        return [exiftool, *self.args, *(_as_filename_arg(t) for t in self.targets)]
+
+
+def _as_filename_arg(path: Path) -> str:
+    """Render a path so exiftool can't mistake it for an option.
+
+    exiftool treats any argument beginning with ``-`` as a flag, so a file named
+    e.g. ``-delete_original.jpg`` would inject an option. Prefixing relative paths
+    that start with ``-`` with ``./`` neutralizes that (absolute paths start with
+    ``/`` and are already safe).
+    """
+    s = str(path)
+    return f"./{s}" if s.startswith("-") else s
 
 
 def ensure_exiftool(exe: str = "exiftool") -> str:

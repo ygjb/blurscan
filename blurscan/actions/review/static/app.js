@@ -3,6 +3,12 @@
 
 const state = { token: "", dryRun: false, items: [], view: [], current: -1, heat: false };
 
+function esc(s) {
+  // Escape user-controlled text (filenames) before inserting into HTML.
+  return String(s).replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
 async function api(path, method = "GET", body = null) {
   const opts = { method, headers: {} };
   if (body) {
@@ -41,18 +47,20 @@ function renderGrid() {
   state.view.forEach((it, i) => {
     const card = document.createElement("figure");
     card.className = "card" + (it.decision && it.decision !== "keep" ? ` decided-${it.decision}` : "");
+    const name = esc(it.name);
     card.innerHTML =
-      `<img loading="lazy" src="/api/thumb/${it.id}" alt="${it.name}">` +
-      (it.decision && it.decision !== "keep" ? `<span class="decision-tag">${it.decision}</span>` : "") +
-      `<figcaption class="meta"><span class="badge ${it.classification}">${it.classification}</span> ` +
-      `<span class="score">${it.score.toFixed(0)}</span><div class="name">${it.name}</div></figcaption>`;
+      `<img loading="lazy" src="/api/thumb/${encodeURIComponent(it.id)}" alt="${name}">` +
+      (it.decision && it.decision !== "keep" ? `<span class="decision-tag">${esc(it.decision)}</span>` : "") +
+      `<figcaption class="meta"><span class="badge ${esc(it.classification)}">${esc(it.classification)}</span> ` +
+      `<span class="score">${it.score.toFixed(0)}</span><div class="name">${name}</div></figcaption>`;
     card.onclick = () => openDetail(i);
     grid.appendChild(card);
   });
 }
 
 function detailSrc(it) {
-  return state.heat ? `/api/heatmap/${it.id}` : `/api/image/${it.id}`;
+  const id = encodeURIComponent(it.id);
+  return state.heat ? `/api/heatmap/${id}` : `/api/image/${id}`;
 }
 
 function openDetail(viewIndex) {

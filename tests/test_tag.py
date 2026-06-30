@@ -95,6 +95,14 @@ def test_argv_is_a_list_no_shell() -> None:
     assert argv[-1] == "a b.jpg"  # spaces preserved as one argv element, not split
 
 
+def test_leading_dash_path_neutralized() -> None:
+    # A file named like an exiftool option must not be parsed as one.
+    cmd = ExiftoolCommand(args=["-overwrite_original"], targets=[Path("-delete_original.jpg")])
+    argv = cmd.argv("exiftool")
+    assert argv[-1] == "./-delete_original.jpg"  # no longer starts with '-'
+    assert not argv[-1].startswith("-")
+
+
 def test_dry_run_does_not_execute(monkeypatch: pytest.MonkeyPatch) -> None:
     def _boom(*a: object, **k: object) -> None:
         raise AssertionError("subprocess must not run during dry-run")
