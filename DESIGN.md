@@ -23,53 +23,81 @@ and acts on the results: report, quarantine, tag, or review in a local web UI.
   `--dry-run` honored by every destructive action.
 
 ### Non-goals (v1)
-- Machine-learning / trained blur classifiers (revisit only if heuristics fall short).
 - Cloud processing, multi-machine distribution, or GPU acceleration.
 - Editing or deblurring images. The tool classifies and organizes; it never alters pixels.
 - Duplicate detection, face detection, or general photo culling (possible future scope).
 
 ---
 
-## 2. Detection approach
+## 2. Detection methods
 
-### 2.1 Core metric — tiled variance-of-Laplacian
+blurscan scores each image through a **selectable detector**, chosen with
+`--method`. Every detector returns a comparable sharpness score (higher = sharper)
+plus secondary signals, so downstream classification, ranking, reporting, and the
+review UI are all **detector-agnostic**. Detectors are registered in a small
+registry (DESIGN.md §3.5) so methods can be added without touching callers.
 
-The classic cheap sharpness signal is the **variance of the Laplacian**: convolve the
-grayscale image with a Laplacian kernel and take the variance of the response. Sharp
-images carry lots of high-frequency edge energy → high variance; blurry images → low.
+```
+--method laplacian   # default; cheap spatial metric, ranked-triage
+--method motion      # motion/panning-blur aware
+--method ml          # learned classifier
+```
 
-A single **global** score wrongly flags shallow-DoF photos (sharp subject, soft
-background) because the soft regions drag the average down. To avoid that:
+### 2.0 Why pluggable (empirical motivation)
+Validation against the maintainer's real set (motorsport panning shots) showed that
+no single spatial-sharpness heuristic separates the collection: a panned subject that
+is "blurry" to the eye still carries high-contrast edges, so tiled variance-of-
+Laplacian scores some blurry frames *above* sharp ones. Out-of-focus blur, by
+contrast, is separated well by the same metric. Different blur regimes need different
+detectors, so the method is a per-run strategy rather than a fixed algorithm.
 
-1. **Decode** the image (format-aware, see §3.2).
-2. **Downscale** to a consistent working size — longest edge ≈ 1000px. This normalizes
-   scores across resolutions and bounds runtime.
-3. **Grayscale** convert.
-4. **Tile** into an `N × N` grid (default 4×4 = 16 tiles).
-5. Compute variance-of-Laplacian **per tile**.
-6. The image's sharpness score = the **maximum tile score** (the sharpest region).
-   - Rationale: a good portrait has at least one tack-sharp tile (the eye) → high score
-     → not flagged. A genuinely blurry frame has *no* sharp tile anywhere → low score
-     → flagged.
+### 2.1 `laplacian` (default) — tiled max variance-of-Laplacian
+The classic cheap signal: convolve grayscale with a Laplacian kernel, take the
+variance of the response (high = sharp edges).
 
-### 2.2 Secondary signals (reported, not decisive in v1)
-- **Global variance-of-Laplacian** — for comparison / debugging.
-- **FFT high-frequency ratio** — fraction of spectral energy above a cutoff; a second
-  opinion robust to different content. Logged in the report; can be promoted to a
-  decision input later.
+1. **Decode** (format-aware, §3.2) → **downscale** to longest edge ≈ 1000px →
+   **grayscale**.
+2. **Tile** into an `N × N` grid (default 4×4); compute variance-of-Laplacian per tile.
+3. Image score = the **maximum tile score** (the sharpest region) — so a sharp-subject /
+   soft-background shot keeps a high score (its tack-sharp tile), avoiding shallow-DoF
+   false positives.
 
-### 2.3 Classification & thresholds
-Absolute thresholds do not transfer across cameras and collections, so we use a hybrid:
+**Use as:** a robust **ranking** signal (blurriest-first). It cleanly catches gross
+out-of-focus blur; on hard content (subject motion blur) it is **triage** feeding the
+review UI, not a hard verdict. Its real-image test asserts a **ranking-quality** bar
+(separation of blurry vs sharp medians / AUC), not perfect threshold separation.
 
-- **Absolute floor** (`--threshold`, default tuned ≈ 100 on the max-tile metric):
-  anything below is **blurry**.
+### 2.2 `motion` — motion/panning-blur aware
+Orientation-aware analysis aimed at residual *subject* motion blur that `laplacian`
+misses: directional gradient energy (anisotropy — motion blur suppresses gradients
+along the motion axis but not across it) and/or directional frequency-domain streak
+detection. Targets the maintainer's failure mode without ML. Validated against
+`test_samples/` with a stronger separation bar than `laplacian`.
+
+### 2.3 `ml` — learned classifier
+Pretrained CNN features (e.g. a small torchvision backbone) feeding a lightweight
+classifier (logistic regression / small head) trained on labeled examples
+(`test_samples/blurry` vs `not_blurry`). Most accurate on content-specific blur;
+gated behind an optional `[ml]` dependency extra so the base install stays light.
+Needs more labeled images than the initial set for a trustworthy model.
+
+### 2.4 Secondary signals (reported by all methods)
+- **Global variance-of-Laplacian** — comparison / debugging.
+- **FFT high-frequency ratio** — fraction of spectral energy above a cutoff.
+Logged in reports and shown in the review detail view; not decisive on their own.
+
+### 2.5 Classification, thresholds & ranking
+Absolute thresholds do not transfer across cameras, collections, or **methods**, so
+each method carries its own default threshold and the hybrid scheme is:
+
+- **Absolute floor** (`--threshold`): below ⇒ **blurry** (default is method-specific).
 - **Adaptive mode** (`--adaptive [PCT]`): additionally flag the bottom `PCT`% of the
-  collection as **soft/borderline**, relative to this run's score distribution.
-- A **borderline band** just above the floor is surfaced for review rather than
-  auto-actioned.
+  run's score distribution as **soft/borderline** — the primary mode when a method
+  ranks better than it separates.
+- A **borderline band** above the floor is surfaced for review rather than auto-actioned.
 
-Every report row includes the raw scores so thresholds can be recalibrated empirically
-on the user's own library.
+Every report row includes the raw scores (and the method used) so thresholds can be
+recalibrated empirically per collection.
 
 **Output classes:** `sharp` · `borderline` · `blurry`.
 
@@ -84,7 +112,12 @@ blurscan/
   cli.py            # argparse; maps flags → pipeline config
   pipeline.py       # walk → load → score → classify → act; parallelized
   loader.py         # format-aware decode (Pillow + pillow-heif + rawpy)
-  metrics.py        # tiled Laplacian, global Laplacian, FFT ratio, scoring
+  metrics.py        # shared primitives: tiled/global Laplacian, FFT ratio, downscale
+  detectors/        # pluggable scoring methods, selected by --method (§3.5)
+    __init__.py     # Detector protocol + registry (register/get/available)
+    laplacian.py    # default: tiled max variance-of-Laplacian (ranked-triage)
+    motion.py       # motion/panning-blur aware
+    ml.py           # learned classifier (optional [ml] extra)
   classifier.py     # threshold + adaptive percentile → class
   cache.py          # SQLite cache keyed on path+mtime+size
   models.py         # dataclasses: ImageResult, ScanConfig
@@ -131,8 +164,35 @@ class ImageResult:
     score_global: float        # secondary
     fft_ratio: float           # secondary
     classification: str        # "sharp" | "borderline" | "blurry"
+    method: str                # detector that produced the score (§2)
     error: str | None = None   # decode/IO failures recorded, not fatal
 ```
+`score_max_tile` holds the **primary** sharpness score regardless of method (the
+field name is historical); `score_global`/`fft_ratio` are the shared secondary
+signals, populated when a method computes them.
+
+### 3.5 Detector registry
+Detectors implement a common protocol and self-register, so `--method` resolves a
+name to an implementation and new methods need no caller changes:
+
+```python
+class DetectorScore:
+    score: float                     # primary; higher = sharper
+    extras: dict[str, float]         # method-specific secondary signals
+    tile_scores: FloatArray | None   # optional, for the review heatmap
+
+class Detector(Protocol):
+    name: str
+    default_threshold: float
+    def score_image(self, rgb: RGBArray, cfg: ScanConfig) -> DetectorScore: ...
+
+register(detector)        # add to the registry
+get(name) -> Detector     # resolve --method
+available() -> list[str]  # for CLI choices / --help
+```
+`metrics.py` holds the shared primitives (downscale, grayscale, Laplacian, tiled
+variance, FFT ratio) that detectors compose. The `pipeline` maps a `DetectorScore`
+onto an `ImageResult`, stamping the `method`.
 
 ---
 
@@ -199,9 +259,10 @@ RAW and HEIC) invoked via `subprocess`:
 blurscan SCAN_PATH [options]
 
 Detection:
-  --threshold FLOAT     Absolute sharpness floor (default ~100)
+  --method {laplacian,motion,ml}  Detector to use (default laplacian)
+  --threshold FLOAT     Absolute sharpness floor (default is method-specific)
   --adaptive [PCT]      Also flag bottom PCT% of collection (default 10)
-  --grid N              Tiles per side (default 4)
+  --grid N              Tiles per side, laplacian/motion (default 4)
   --working-size PX     Downscale longest edge before analysis (default 1000)
   --raw-full            Demosaic full RAW instead of embedded preview
 
