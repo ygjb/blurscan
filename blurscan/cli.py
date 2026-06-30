@@ -14,6 +14,7 @@ from pathlib import Path
 
 from blurscan.actions.quarantine import quarantine
 from blurscan.actions.report import write_report
+from blurscan.actions.tag import ExiftoolNotFound, tag
 from blurscan.detectors import available
 from blurscan.models import BLURRY, BORDERLINE, SHARP, ImageResult, ScanConfig
 from blurscan.pipeline import run_scan
@@ -72,9 +73,19 @@ def build_parser() -> argparse.ArgumentParser:
     quar.add_argument("--copy", metavar="DIR", help="Copy flagged images to DIR (reversible).")
     quar.add_argument("--move", metavar="DIR", help="Move flagged images to DIR.")
     actions.add_argument(
+        "--tag",
+        action="store_true",
+        help="Write an XMP keyword + rating onto flagged images via exiftool.",
+    )
+    actions.add_argument(
+        "--raw-inplace",
+        action="store_true",
+        help="Tag RAW files in place instead of writing an XMP sidecar (default: sidecar).",
+    )
+    actions.add_argument(
         "--include-borderline",
         action="store_true",
-        help="Also quarantine borderline images (default: blurry only).",
+        help="Also act on borderline images (default: blurry only).",
     )
     actions.add_argument(
         "--dry-run",
@@ -157,6 +168,23 @@ def main(argv: list[str] | None = None) -> int:
         if args.verbose or args.dry_run:
             for a in actions:
                 print(f"  {a.src} -> {a.dst}")
+    if args.tag:
+        try:
+            commands = tag(
+                results,
+                dry_run=args.dry_run,
+                include_borderline=args.include_borderline,
+                raw_inplace=args.raw_inplace,
+            )
+        except ExiftoolNotFound as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            return 3
+        n_targets = sum(len(c.targets) for c in commands)
+        prefix = "[dry-run] would " if args.dry_run else ""
+        print(f"{prefix}tag {n_targets} flagged image(s) via exiftool")
+        if args.verbose or args.dry_run:
+            for c in commands:
+                print(f"  exiftool {' '.join(c.args)} [{len(c.targets)} file(s)]")
     return 0
 
 
