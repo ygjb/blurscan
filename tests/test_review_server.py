@@ -11,7 +11,7 @@ from numpy.typing import NDArray
 from PIL import Image
 
 from blurscan.actions.review.server import ReviewState, create_app, serve
-from blurscan.models import BLURRY, SHARP, ImageResult, ScanConfig
+from blurscan.models import BLURRY, BORDERLINE, SHARP, ImageResult, ScanConfig
 
 
 def _img(path: Path) -> Path:
@@ -98,6 +98,22 @@ def test_apply_dry_run(client_and_state: tuple[FlaskClient, ReviewState]) -> Non
     assert summary["quarantined"] == 1
     # dry-run created nothing
     assert not (state.cfg.scan_path / "_blurscan_quarantine").exists()
+
+
+def test_apply_quarantines_explicit_borderline(tmp_path: Path) -> None:
+    # A borderline image the user explicitly stages for quarantine must be acted
+    # on — the apply path must not re-apply the blurry-only classification filter.
+    border = _img(tmp_path / "border.png")
+    state = ReviewState(
+        [ImageResult(border, 32, 32, 120.0, 60.0, 0.3, BORDERLINE)],
+        ScanConfig(scan_path=tmp_path),  # not dry-run: actually copies
+    )
+    client = create_app(state).test_client()
+    hdr = {"X-Blurscan-Token": state.token}
+    assert _decide(client, state, "0", "quarantine") == 200
+    summary = client.post("/api/apply", headers=hdr).get_json()
+    assert summary["quarantined"] == 1
+    assert (tmp_path / "_blurscan_quarantine" / "border.png").exists()
 
 
 def test_shutdown_sets_event(client_and_state: tuple[FlaskClient, ReviewState]) -> None:
