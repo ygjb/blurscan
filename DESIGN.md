@@ -234,15 +234,31 @@ Performance / safety:
 ---
 
 ## 8. Testing strategy
-- **Unit:** `metrics.py` against synthetic images — a sharp checkerboard vs. a Gaussian-
-  blurred copy must score in the expected order; a half-sharp/half-blurred image must
-  score high (max-tile behavior).
-- **Loader:** round-trip a small JPEG, PNG, HEIC, and RAW fixture.
-- **Classifier:** threshold and adaptive-percentile boundary cases.
+
+### 8.1 Two-tier fixtures (synthetic gates CI; real images validate locally)
+- **Synthetic, always-run (the CI gate):** programmatically generated images — a sharp
+  checkerboard vs. a Gaussian-blurred copy, a half-sharp/half-blurred frame — so the
+  merge gate never depends on any uncommitted file.
+- **Real labeled images, local-only:** a `test_samples/` directory (gitignored, **not**
+  committed) holding the user's own examples:
+  - `test_samples/blurry/` — every image expected to classify as **blurry**.
+  - `test_samples/not_blurry/` — every image expected to classify as **sharp**.
+  Tests over these are guarded with `@pytest.mark.skipif(...)` on the directory's
+  presence: they run during local development and **skip cleanly in CI** (where
+  `test_samples/` is absent). A shared `conftest.py` fixture discovers and yields the
+  labeled paths.
+
+### 8.2 Coverage
+- **Unit:** `metrics.py` against the synthetic images — order (sharp > blurred) and
+  max-tile behavior (half/half scores high). Locally, also assert every
+  `test_samples/blurry/*` scores below and every `test_samples/not_blurry/*` above the
+  default threshold.
+- **Loader:** round-trip a small JPEG, PNG, HEIC, and RAW fixture (synthetic/generated
+  where possible; HEIC/RAW guarded like the real set if a committed fixture isn't viable).
+- **Classifier:** threshold and adaptive-percentile boundary cases (synthetic).
 - **Actions:** quarantine collision handling and dry-run (no filesystem changes);
   tag.py with a mocked exiftool process.
 - **Review API:** endpoint smoke tests with Flask's test client.
-- A small committed fixture set (a few public-domain images, sharp + blurred variants).
 
 ---
 
