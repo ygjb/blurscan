@@ -27,11 +27,15 @@ which exiftool || echo "exiftool MISSING — §6 tag tests will be skipped"
 You need a directory with a mix of blurry and sharp images, ideally across formats. Two
 options:
 
-**Option A — use the bundled samples / corpus builder:**
+**Option A — reconstruct the project corpus (download-on-demand):**
+
+Corpus images aren't committed; only manifests are. Reconstruct them into a local
+gitignored cache (`test_samples/_cache/`):
 
 ```bash
-ls test_samples/                 # repo-bundled fixtures
-ls scripts/                      # corpus builder utilities, if present
+python scripts/fetch_corpus.py            # web (JPEG) + raw + heic, sha256-verified
+ls test_samples/_cache/web_corpus/{blurry,not_blurry}
+ls test_samples/_cache/raw_corpus test_samples/_cache/heic_corpus   # RAW + HEIC fixtures
 ```
 
 **Option B — make a scratch corpus by hand:**
@@ -230,9 +234,13 @@ blurscan "$TC" --no-cache --jobs 4     # parallel
 
 ---
 
-## 6. RAW handling (only if you have a RAW file in `$TC`)
+## 6. RAW handling
+
+The reconstructed RAW corpus (CC0, from `scripts/fetch_corpus.py`) provides fixtures —
+copy a few into `$TC`, or scan the cache directly:
 
 ```bash
+cp test_samples/_cache/raw_corpus/*.dng test_samples/_cache/raw_corpus/*.nef "$TC/" 2>/dev/null
 blurscan "$TC" --method laplacian -v               # embedded preview (fast, default)
 time blurscan "$TC" --no-cache --raw-full -v       # full demosaic (slower)
 ```

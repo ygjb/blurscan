@@ -15,19 +15,28 @@ Two tiers, so the suite is self-contained yet validated on real photos:
 - **Synthetic, always-run** — images are generated in-test (checkerboards, Gaussian/
   directional blur). These cover the core invariants and gate CI with no external
   dependency. Most tests use them.
-- **Real labeled corpus** — a Creative-Commons set committed under
-  `test_samples/web_corpus/{blurry,not_blurry}` (see its `ATTRIBUTION.md` /
-  `manifest.csv`). `conftest.py` exposes it via the `blurry_samples` / `sharp_samples`
-  fixtures, which `pytest.skip` if the corpus is absent. Real-image tests assert a
-  **ranking-quality** bar (median separation + ROC-AUC), not perfect separation.
+- **Real labeled corpus (download-on-demand)** — Creative-Commons / public-domain images
+  described by committed manifests under `test_samples/{web_corpus,raw_corpus,heic_corpus}/`
+  (`manifest.csv` + `ATTRIBUTION.md`); the images themselves are **not** committed.
+  Reconstruct them with:
+
+  ```bash
+  python scripts/fetch_corpus.py            # all corpora -> test_samples/_cache/
+  python scripts/fetch_corpus.py raw_corpus # just one
+  ```
+
+  Files are verified by sha256 (HEIC is transcoded locally from the CC JPEGs). `conftest.py`
+  exposes them via the `blurry_samples` / `sharp_samples` / `raw_corpus_files` /
+  `heic_corpus_files` fixtures, which `pytest.skip` when the cache is absent. Real-image
+  tests assert a **ranking-quality** bar (median separation + ROC-AUC). Override the cache
+  location with `$BLURSCAN_CORPUS_CACHE`.
 
 ## Conditional skips
 
-- `blurry_samples` / `sharp_samples` — skip when the corpus is missing.
-- **RAW** round-trip — skips unless a RAW file exists under `test_samples/` (rawpy is
-  read-only; RAW can't be synthesized).
-- **exiftool** round-trip (`test_tag.py`) — skips unless `exiftool` is on PATH (installed
-  in CI).
+- `blurry_samples` / `sharp_samples` / `raw_corpus_files` / `heic_corpus_files` — skip when
+  the corpus cache is absent (fresh clone / CI; run `scripts/fetch_corpus.py` locally).
+- Manifest integrity (`test_corpus_manifest.py`) always runs — no network or cache needed.
+- **exiftool** round-trip (`test_tag.py`) — skips unless `exiftool` is on PATH.
 - **ml** detector feature/scoring tests — skip unless torch is installed (the `[ml]`
   extra). CI does not install it and never downloads model weights.
 

@@ -20,6 +20,10 @@ env/
 .blurscan_cache/
 thumbs_cache/
 
+# Reconstructable corpus cache — images are fetched from committed manifests
+# via scripts/fetch_corpus.py, never committed (see test_samples/*/manifest.csv).
+test_samples/_cache/
+
 # OS / editor
 .DS_Store
 .idea/

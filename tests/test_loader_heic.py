@@ -37,3 +37,10 @@ def test_heic_roundtrip(tmp_path: Path) -> None:
     loaded = load_image(path)
     assert loaded.dtype == np.uint8
     assert loaded.shape == (40, 60, 3)
+
+
+def test_heic_corpus_decodes(heic_corpus_files: list[Path]) -> None:
+    # Every reconstructed HEIC fixture must decode to RGB (skips if cache absent).
+    for heic in heic_corpus_files:
+        rgb = load_image(heic)
+        assert rgb.dtype == np.uint8 and rgb.ndim == 3 and rgb.shape[2] == 3
