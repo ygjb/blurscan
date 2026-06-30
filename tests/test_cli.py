@@ -44,6 +44,26 @@ def test_missing_directory_errors() -> None:
     assert main(["/definitely/not/a/dir"]) == 2
 
 
+def test_ml_missing_dependency_clean_error(
+    photos: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    # When the optional [ml] extra is absent, run_scan raises MLDependencyError.
+    # The CLI must turn that into a clean one-line error + exit code 4, not a
+    # raw traceback escaping through the process pool.
+    from blurscan.detectors.ml import MLDependencyError
+
+    def _boom(_cfg: object) -> list[object]:
+        raise MLDependencyError(
+            "the 'ml' method needs torch + torchvision — install with `pip install blurscan[ml]`"
+        )
+
+    monkeypatch.setattr("blurscan.cli.run_scan", _boom)
+    assert main([str(photos), "--method", "ml"]) == 4
+    captured = capsys.readouterr()
+    assert "error: the 'ml' method needs torch + torchvision" in captured.err
+    assert "Traceback" not in captured.err and "Traceback" not in captured.out
+
+
 def test_summary_run(photos: Path, capsys: pytest.CaptureFixture[str]) -> None:
     assert main([str(photos)]) == 0
     out = capsys.readouterr().out

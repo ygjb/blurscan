@@ -17,6 +17,7 @@ from blurscan.actions.report import write_report
 from blurscan.actions.review.server import serve
 from blurscan.actions.tag import ExiftoolNotFound, tag
 from blurscan.detectors import available
+from blurscan.detectors.ml import MLDependencyError
 from blurscan.models import BLURRY, BORDERLINE, SHARP, ImageResult, ScanConfig
 from blurscan.pipeline import run_scan
 
@@ -166,7 +167,13 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     cfg = _config_from_args(args)
-    results = run_scan(cfg)
+    try:
+        results = run_scan(cfg)
+    except MLDependencyError as exc:
+        # Optional 'ml' extra not installed: fail cleanly instead of surfacing a
+        # raw traceback through the process pool.
+        print(f"error: {exc}", file=sys.stderr)
+        return 4
 
     if args.review:
         serve(results, cfg, port=args.port, open_browser=not args.no_open)
