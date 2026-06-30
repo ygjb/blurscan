@@ -67,6 +67,13 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Disable the on-disk result cache (re-score every file).",
     )
+    detect.add_argument(
+        "--jobs",
+        type=int,
+        default=None,
+        metavar="N",
+        help="Parallel worker processes (default: CPU count).",
+    )
 
     out = parser.add_argument_group("output")
     out.add_argument("--report", metavar="PATH", help="Write CSV + HTML report to PATH.{csv,html}.")
@@ -110,6 +117,7 @@ def _config_from_args(args: argparse.Namespace) -> ScanConfig:
         working_size=args.working_size,
         raw_full=args.raw_full,
         use_cache=not args.no_cache,
+        jobs=args.jobs,
     )
 
 
