@@ -41,7 +41,7 @@ def test_image_result_from_error() -> None:
 
 def test_scan_config_defaults() -> None:
     cfg = ScanConfig(scan_path=Path("/photos"))
-    assert cfg.threshold == 100.0
+    assert cfg.threshold is None  # resolved from the detector's default
     assert cfg.grid == 4
     assert cfg.working_size == 1000
     assert cfg.adaptive_pct is None
