@@ -28,6 +28,7 @@ class ScanConfig:
     """
 
     scan_path: Path
+    method: str = "laplacian"  # detection method (--method); see DESIGN.md §2
     threshold: float | None = None  # None = use the detector's default threshold
     adaptive_pct: float | None = None  # None = adaptive mode off
     grid: int = 4
@@ -41,6 +42,7 @@ class ScanConfig:
     def to_dict(self) -> dict[str, Any]:
         return {
             "scan_path": str(self.scan_path),
+            "method": self.method,
             "threshold": self.threshold,
             "adaptive_pct": self.adaptive_pct,
             "grid": self.grid,
@@ -57,6 +59,7 @@ class ScanConfig:
         formats = data.get("formats")
         return cls(
             scan_path=Path(data["scan_path"]),
+            method=data.get("method", "laplacian"),
             threshold=data.get("threshold"),
             adaptive_pct=data.get("adaptive_pct"),
             grid=data.get("grid", 4),
