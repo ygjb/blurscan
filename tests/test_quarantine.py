@@ -50,6 +50,21 @@ def test_copy_preserves_originals(tmp_path: Path) -> None:
     assert actions[0].dst == dest / "blur.jpg"
 
 
+def test_filter_results_false_honors_explicit_selection(tmp_path: Path) -> None:
+    # The review UI stages images explicitly; filter_results=False must act on
+    # exactly what it is given, including borderline/sharp/errored items that the
+    # default classification filter would drop.
+    border = _touch(tmp_path / "border.jpg")
+    sharp = _touch(tmp_path / "sharp.jpg")
+    dest = tmp_path / "quar"
+    given = [_result(border, BORDERLINE), _result(sharp, SHARP)]
+
+    assert flagged_results(given) == []  # default filter would quarantine nothing
+    actions = quarantine(given, dest, filter_results=False)
+    assert {a.dst.name for a in actions} == {"border.jpg", "sharp.jpg"}
+    assert (dest / "border.jpg").exists() and (dest / "sharp.jpg").exists()
+
+
 def test_move_removes_originals(tmp_path: Path) -> None:
     src = _touch(tmp_path / "blur.jpg")
     dest = tmp_path / "quar"

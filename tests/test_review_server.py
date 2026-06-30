@@ -11,7 +11,7 @@ from numpy.typing import NDArray
 from PIL import Image
 
 from blurscan.actions.review.server import ReviewState, create_app, serve
-from blurscan.models import BLURRY, SHARP, ImageResult, ScanConfig
+from blurscan.models import BLURRY, BORDERLINE, SHARP, ImageResult, ScanConfig
 
 
 def _img(path: Path) -> Path:
@@ -100,6 +100,22 @@ def test_apply_dry_run(client_and_state: tuple[FlaskClient, ReviewState]) -> Non
     assert not (state.cfg.scan_path / "_blurscan_quarantine").exists()
 
 
+def test_apply_quarantines_explicit_borderline(tmp_path: Path) -> None:
+    # A borderline image the user explicitly stages for quarantine must be acted
+    # on — the apply path must not re-apply the blurry-only classification filter.
+    border = _img(tmp_path / "border.png")
+    state = ReviewState(
+        [ImageResult(border, 32, 32, 120.0, 60.0, 0.3, BORDERLINE)],
+        ScanConfig(scan_path=tmp_path),  # not dry-run: actually copies
+    )
+    client = create_app(state).test_client()
+    hdr = {"X-Blurscan-Token": state.token}
+    assert _decide(client, state, "0", "quarantine") == 200
+    summary = client.post("/api/apply", headers=hdr).get_json()
+    assert summary["quarantined"] == 1
+    assert (tmp_path / "_blurscan_quarantine" / "border.png").exists()
+
+
 def test_shutdown_sets_event(client_and_state: tuple[FlaskClient, ReviewState]) -> None:
     client, state = client_and_state
     hdr = {"X-Blurscan-Token": state.token}
@@ -110,3 +126,44 @@ def test_shutdown_sets_event(client_and_state: tuple[FlaskClient, ReviewState]) 
 def test_serve_rejects_non_loopback(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="loopback"):
         serve([], ScanConfig(scan_path=tmp_path), host="0.0.0.0")
+
+
+def test_live_server_decision_persists_across_threads(tmp_path: Path) -> None:
+    """Regression for the cache-backed store: a decision POSTed to a *real*
+    threaded server must succeed (200) and persist. ``test_client`` dispatches in
+    the calling thread and so cannot catch the SQLite cross-thread bug; this test
+    drives ``make_server`` on its own thread the way ``serve`` does."""
+    import threading
+    from urllib.request import Request, urlopen
+
+    from werkzeug.serving import make_server
+
+    from blurscan.actions.review.store import DecisionStore
+
+    img = _img(tmp_path / "blur.png")
+    results = [ImageResult(img, 32, 32, 5.0, 2.0, 0.1, BLURRY)]
+    cfg = ScanConfig(scan_path=tmp_path)
+    db = tmp_path / "decisions.sqlite"
+
+    with DecisionStore(db) as store:
+        state = ReviewState(results, cfg, store=store)
+        server = make_server("127.0.0.1", 0, create_app(state))
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            url = f"http://127.0.0.1:{server.server_port}/api/decision"
+            body = b'{"id": "0", "decision": "quarantine"}'
+            req = Request(
+                url,
+                data=body,
+                headers={"Content-Type": "application/json", "X-Blurscan-Token": state.token},
+            )
+            with urlopen(req) as resp:  # noqa: S310 - loopback test server
+                assert resp.status == 200
+        finally:
+            server.shutdown()
+            thread.join(timeout=5)
+
+    # The decision was committed and is visible to a freshly opened store.
+    with DecisionStore(db) as reopened:
+        assert reopened.load() == {str(img): "quarantine"}
