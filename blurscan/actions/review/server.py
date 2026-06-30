@@ -21,7 +21,10 @@ from typing import Any
 from flask import Flask, Response, jsonify, request, send_from_directory
 
 from blurscan.actions.quarantine import quarantine
+from blurscan.actions.review.heatmap import heatmap_jpeg
+from blurscan.actions.review.store import DecisionStore
 from blurscan.actions.tag import ExiftoolNotFound, tag
+from blurscan.cache import default_cache_path
 from blurscan.models import ImageResult, ScanConfig
 from blurscan.thumbs import thumbnail_bytes
 
@@ -35,15 +38,29 @@ _PREVIEW_EDGE = 1400
 class ReviewState:
     """Server-side state: the id->result map, staged decisions, and the token."""
 
-    def __init__(self, results: list[ImageResult], cfg: ScanConfig) -> None:
+    def __init__(
+        self, results: list[ImageResult], cfg: ScanConfig, store: DecisionStore | None = None
+    ) -> None:
         self.cfg = cfg
         self.items: dict[str, ImageResult] = {str(i): r for i, r in enumerate(results)}
-        self.decisions: dict[str, str] = {}
+        self.store = store
         self.token = secrets.token_urlsafe(24)
         self._shutdown = threading.Event()
+        # Restore any previously staged decisions (resumable session).
+        persisted = store.load() if store is not None else {}
+        self.decisions: dict[str, str] = {
+            item_id: persisted[str(r.path)]
+            for item_id, r in self.items.items()
+            if str(r.path) in persisted
+        }
 
     def get(self, item_id: str) -> ImageResult | None:
         return self.items.get(item_id)
+
+    def set_decision(self, item_id: str, decision: str) -> None:
+        self.decisions[item_id] = decision
+        if self.store is not None:
+            self.store.set(str(self.items[item_id].path), decision)
 
     def request_shutdown(self) -> None:
         self._shutdown.set()
@@ -103,6 +120,19 @@ def create_app(state: ReviewState) -> Flask:
     def image(item_id: str) -> Response:
         return _serve_image(state, item_id, _PREVIEW_EDGE)
 
+    @app.get("/api/heatmap/<item_id>")
+    def heatmap(item_id: str) -> Response:
+        result = state.get(item_id)
+        if result is None or result.error is not None:
+            return _err("not found", 404)
+        try:
+            data = heatmap_jpeg(result, state.cfg)
+        except Exception:  # noqa: BLE001 - render failure -> 404, never 500
+            return _err("not renderable", 404)
+        if data is None:
+            return _err("no heatmap for this method", 404)
+        return Response(data, mimetype="image/jpeg")
+
     @app.post("/api/decision")
     def decision() -> Response:
         if not _authorized():
@@ -113,7 +143,7 @@ def create_app(state: ReviewState) -> Flask:
             return _err("unknown id", 404)
         if value not in VALID_DECISIONS:
             return _err("invalid decision", 400)
-        state.decisions[item_id] = value
+        state.set_decision(item_id, value)
         return jsonify({"ok": True})
 
     @app.post("/api/apply")
@@ -183,7 +213,8 @@ def serve(
     if host not in ("127.0.0.1", "localhost"):
         raise ValueError("review server only binds loopback (127.0.0.1)")
 
-    state = ReviewState(results, cfg)
+    store = DecisionStore(default_cache_path(cfg.scan_path)) if cfg.use_cache else None
+    state = ReviewState(results, cfg, store=store)
     app = create_app(state)
     server = make_server(host, port, app)
     url = f"http://{host}:{server.server_port}/"

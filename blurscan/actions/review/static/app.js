@@ -1,7 +1,7 @@
 "use strict";
 // blurscan review SPA. Talks to the local API in server.py.
 
-const state = { token: "", dryRun: false, items: [], view: [], current: -1 };
+const state = { token: "", dryRun: false, items: [], view: [], current: -1, heat: false };
 
 async function api(path, method = "GET", body = null) {
   const opts = { method, headers: {} };
@@ -51,11 +51,15 @@ function renderGrid() {
   });
 }
 
+function detailSrc(it) {
+  return state.heat ? `/api/heatmap/${it.id}` : `/api/image/${it.id}`;
+}
+
 function openDetail(viewIndex) {
   state.current = viewIndex;
   const it = state.view[viewIndex];
   if (!it) return;
-  document.getElementById("detail-img").src = `/api/image/${it.id}`;
+  document.getElementById("detail-img").src = detailSrc(it);
   document.getElementById("detail-name").textContent = it.name;
   document.getElementById("detail-stats").innerHTML =
     `<dt>class</dt><dd>${it.classification}</dd>` +
@@ -72,6 +76,12 @@ function closeDetail() {
   state.current = -1;
 }
 
+function toggleHeatmap() {
+  state.heat = !state.heat;
+  const it = state.view[state.current];
+  if (it) document.getElementById("detail-img").src = detailSrc(it);
+}
+
 async function decide(value) {
   const it = state.view[state.current];
   if (!it) return;
@@ -86,6 +96,7 @@ function onKey(e) {
   if (document.getElementById("detail").hidden) return;
   const map = { k: "keep", x: "quarantine", t: "tag" };
   if (map[e.key]) decide(map[e.key]);
+  else if (e.key === "h") toggleHeatmap();
   else if (e.key === "ArrowRight") openDetail(Math.min(state.current + 1, state.view.length - 1));
   else if (e.key === "ArrowLeft") openDetail(Math.max(state.current - 1, 0));
   else if (e.key === "Escape") closeDetail();
@@ -108,6 +119,7 @@ async function init() {
   document.querySelectorAll(".decision-buttons button").forEach((b) => {
     b.onclick = () => decide(b.dataset.decision);
   });
+  document.getElementById("heatmap-toggle").onclick = toggleHeatmap;
   document.getElementById("apply").onclick = async () => {
     const s = await api("/api/apply", "POST", {});
     alert(`${s.dry_run ? "[dry-run] " : ""}quarantined ${s.quarantined}, tagged ${s.tagged}` +
