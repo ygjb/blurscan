@@ -33,7 +33,7 @@ def iter_image_paths(cfg: ScanConfig) -> Iterator[Path]:
 def score_path(path: Path, detector: Detector, cfg: ScanConfig) -> ImageResult:
     """Load and score a single image. Decode failures become error results."""
     try:
-        rgb = load_image(path)
+        rgb = load_image(path, raw_full=cfg.raw_full)
     except ImageLoadError as exc:
         return ImageResult.from_error(path, str(exc), method=detector.name)
     ds = detector.score_image(rgb, cfg)

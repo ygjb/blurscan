@@ -8,6 +8,7 @@ registered in later issues without touching callers. Every loader returns an
 
 from __future__ import annotations
 
+import io
 from collections.abc import Callable, Iterable
 from pathlib import Path
 
@@ -18,13 +19,19 @@ from PIL import Image, UnidentifiedImageError
 RGBArray = NDArray[np.uint8]
 LoaderFunc = Callable[[Path], RGBArray]
 
+# Camera RAW extensions, decoded via rawpy (DESIGN.md §3.2). Handled separately
+# from the registry because they honor the ``raw_full`` option.
+RAW_EXTENSIONS = frozenset(
+    {".cr2", ".cr3", ".nef", ".arw", ".dng", ".raf", ".rw2", ".orf", ".pef", ".srw"}
+)
+
 
 class ImageLoadError(Exception):
     """Raised when an image cannot be decoded."""
 
 
 # Extension (lowercase, with dot) -> decoder. Populated below and extended by
-# the HEIC/RAW issues via :func:`register_loader`.
+# the HEIC issue via :func:`register_loader`.
 _LOADERS: dict[str, LoaderFunc] = {}
 
 
@@ -35,13 +42,14 @@ def register_loader(extensions: Iterable[str], func: LoaderFunc) -> None:
 
 
 def supported_extensions() -> set[str]:
-    """Return the set of currently registered, decodable extensions."""
-    return set(_LOADERS)
+    """Return the set of currently decodable extensions (registry + RAW)."""
+    return set(_LOADERS) | set(RAW_EXTENSIONS)
 
 
 def is_supported(path: Path | str) -> bool:
-    """True if ``path``'s extension has a registered decoder."""
-    return Path(path).suffix.lower() in _LOADERS
+    """True if ``path``'s extension can be decoded."""
+    ext = Path(path).suffix.lower()
+    return ext in _LOADERS or ext in RAW_EXTENSIONS
 
 
 def _load_with_pillow(path: Path) -> RGBArray:
@@ -54,16 +62,50 @@ def _load_with_pillow(path: Path) -> RGBArray:
         raise ImageLoadError(f"failed to decode {path}: {exc}") from exc
 
 
-def load_image(path: Path | str) -> RGBArray:
+def _load_raw(path: Path, raw_full: bool) -> RGBArray:
+    """Decode a camera RAW file via rawpy.
+
+    Default fast path extracts the embedded JPEG/bitmap preview (plenty for blur
+    scoring); ``raw_full`` demosaics the full sensor data instead. Falls back to
+    full demosaic if no usable preview is present.
+    """
+    import rawpy
+
+    try:
+        if not raw_full:
+            with rawpy.imread(str(path)) as raw:
+                try:
+                    thumb = raw.extract_thumb()
+                except (rawpy.LibRawNoThumbnailError, rawpy.LibRawUnsupportedThumbnailError):
+                    thumb = None
+            if thumb is not None:
+                if thumb.format == rawpy.ThumbFormat.JPEG:
+                    with Image.open(io.BytesIO(thumb.data)) as img:
+                        return np.asarray(img.convert("RGB"), dtype=np.uint8)
+                if thumb.format == rawpy.ThumbFormat.BITMAP:
+                    return np.asarray(thumb.data, dtype=np.uint8)
+        # Full demosaic (explicit --raw-full, or no preview available).
+        with rawpy.imread(str(path)) as raw:
+            return np.asarray(raw.postprocess(use_camera_wb=True), dtype=np.uint8)
+    except (rawpy.LibRawError, OSError, ValueError) as exc:
+        raise ImageLoadError(f"failed to decode RAW {path}: {exc}") from exc
+
+
+def load_image(path: Path | str, raw_full: bool = False) -> RGBArray:
     """Load ``path`` as an ``H x W x 3`` uint8 RGB array.
 
-    Raises :class:`ImageLoadError` for unsupported extensions or decode failures.
+    ``raw_full`` only affects RAW files (preview vs. full demosaic). Raises
+    :class:`ImageLoadError` for unsupported extensions or decode failures.
     """
     path = Path(path)
-    loader = _LOADERS.get(path.suffix.lower())
-    if loader is None:
-        raise ImageLoadError(f"unsupported image extension: {path.suffix!r} ({path})")
-    arr = loader(path)
+    ext = path.suffix.lower()
+    if ext in RAW_EXTENSIONS:
+        arr = _load_raw(path, raw_full)
+    else:
+        loader = _LOADERS.get(ext)
+        if loader is None:
+            raise ImageLoadError(f"unsupported image extension: {path.suffix!r} ({path})")
+        arr = loader(path)
     if arr.ndim != 3 or arr.shape[2] != 3:
         raise ImageLoadError(f"decoder returned non-RGB array for {path}: shape {arr.shape}")
     return arr

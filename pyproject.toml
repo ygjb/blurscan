@@ -15,6 +15,7 @@ dependencies = [
   "opencv-python-headless>=4.8",
   "pillow>=10.0",
   "pillow-heif>=0.13",
+  "rawpy>=0.18",
 ]
 
 [project.optional-dependencies]
@@ -43,6 +44,13 @@ select = ["E", "F", "I", "UP", "B"]
 python_version = "3.12"
 strict = true
 ignore_missing_imports = true
+
+# rawpy ships partial type info that omits runtime attrs (ThumbFormat, LibRaw*
+# errors); treat it as untyped rather than chase incomplete stubs.
+[[tool.mypy.overrides]]
+module = ["rawpy", "rawpy.*"]
+follow_imports = "skip"
+follow_imports_for_stubs = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
