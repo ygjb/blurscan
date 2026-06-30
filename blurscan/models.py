@@ -28,7 +28,7 @@ class ScanConfig:
     """
 
     scan_path: Path
-    threshold: float = 100.0
+    threshold: float | None = None  # None = use the detector's default threshold
     adaptive_pct: float | None = None  # None = adaptive mode off
     grid: int = 4
     working_size: int = 1000
@@ -57,7 +57,7 @@ class ScanConfig:
         formats = data.get("formats")
         return cls(
             scan_path=Path(data["scan_path"]),
-            threshold=data.get("threshold", 100.0),
+            threshold=data.get("threshold"),
             adaptive_pct=data.get("adaptive_pct"),
             grid=data.get("grid", 4),
             working_size=data.get("working_size", 1000),
@@ -81,10 +81,11 @@ class ImageResult:
     path: Path
     width: int
     height: int
-    score_max_tile: float
+    score_max_tile: float  # primary score (name historical; see DESIGN.md §3.4)
     score_global: float
     fft_ratio: float
     classification: str
+    method: str = "laplacian"
     error: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
@@ -96,6 +97,7 @@ class ImageResult:
             "score_global": self.score_global,
             "fft_ratio": self.fft_ratio,
             "classification": self.classification,
+            "method": self.method,
             "error": self.error,
         }
 
@@ -109,11 +111,12 @@ class ImageResult:
             score_global=float(data["score_global"]),
             fft_ratio=float(data["fft_ratio"]),
             classification=data["classification"],
+            method=data.get("method", "laplacian"),
             error=data.get("error"),
         )
 
     @classmethod
-    def from_error(cls, path: Path, error: str) -> ImageResult:
+    def from_error(cls, path: Path, error: str, method: str = "laplacian") -> ImageResult:
         """Construct a result representing a failed load/score for ``path``."""
         return cls(
             path=path,
@@ -123,6 +126,7 @@ class ImageResult:
             score_global=0.0,
             fft_ratio=0.0,
             classification=BLURRY,
+            method=method,
             error=error,
         )
 
