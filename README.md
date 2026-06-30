@@ -1,0 +1,35 @@
+# blurscan
+
+A Python CLI tool that scans a photo collection, scores each image's sharpness, and
+flags blurry images — while sparing intentional shallow-depth-of-field shots. Blurry
+images can be reported, quarantined, tagged (EXIF/XMP via exiftool), or triaged in a
+local web review UI.
+
+> **Status:** design / pre-implementation. See [DESIGN.md](DESIGN.md) for the full
+> specification, architecture, and build plan.
+
+## Highlights
+
+- **Smart detection** — tiled, max-region variance-of-Laplacian scoring picks the
+  *sharpest* region of each image, so portraits with sharp subjects and soft backgrounds
+  aren't falsely flagged.
+- **Broad format support** — JPEG/PNG, HEIC/HEIF, and camera RAW.
+- **Flexible actions** (combine freely; report-only by default):
+  - `--report` — CSV + HTML report with thumbnails and scores
+  - `--copy` / `--move` — quarantine flagged images
+  - `--tag` — write XMP keyword + rating via exiftool (RAW sidecars by default)
+  - `--review` — local web UI for fast keyboard-driven triage with per-tile heatmaps
+- **Safe by default** — report-only unless an action flag is given; `--dry-run` honored
+  by every destructive action.
+
+## Planned CLI
+
+```
+blurscan SCAN_PATH [--report PATH] [--copy DIR | --move DIR] [--tag] [--review] [options]
+```
+
+See [DESIGN.md §6](DESIGN.md) for the full CLI reference.
+
+## License
+
+MIT
