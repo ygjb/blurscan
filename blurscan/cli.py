@@ -55,6 +55,11 @@ def build_parser() -> argparse.ArgumentParser:
         default=1000,
         help="Downscale longest edge before analysis (default 1000).",
     )
+    detect.add_argument(
+        "--raw-full",
+        action="store_true",
+        help="Demosaic full RAW sensor data instead of the embedded preview.",
+    )
 
     out = parser.add_argument_group("output")
     out.add_argument("--report", metavar="PATH", help="Write CSV + HTML report to PATH.{csv,html}.")
@@ -71,6 +76,7 @@ def _config_from_args(args: argparse.Namespace) -> ScanConfig:
         adaptive_pct=args.adaptive,
         grid=args.grid,
         working_size=args.working_size,
+        raw_full=args.raw_full,
     )
 
 
