@@ -110,3 +110,44 @@ def test_shutdown_sets_event(client_and_state: tuple[FlaskClient, ReviewState]) 
 def test_serve_rejects_non_loopback(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="loopback"):
         serve([], ScanConfig(scan_path=tmp_path), host="0.0.0.0")
+
+
+def test_live_server_decision_persists_across_threads(tmp_path: Path) -> None:
+    """Regression for the cache-backed store: a decision POSTed to a *real*
+    threaded server must succeed (200) and persist. ``test_client`` dispatches in
+    the calling thread and so cannot catch the SQLite cross-thread bug; this test
+    drives ``make_server`` on its own thread the way ``serve`` does."""
+    import threading
+    from urllib.request import Request, urlopen
+
+    from werkzeug.serving import make_server
+
+    from blurscan.actions.review.store import DecisionStore
+
+    img = _img(tmp_path / "blur.png")
+    results = [ImageResult(img, 32, 32, 5.0, 2.0, 0.1, BLURRY)]
+    cfg = ScanConfig(scan_path=tmp_path)
+    db = tmp_path / "decisions.sqlite"
+
+    with DecisionStore(db) as store:
+        state = ReviewState(results, cfg, store=store)
+        server = make_server("127.0.0.1", 0, create_app(state))
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            url = f"http://127.0.0.1:{server.server_port}/api/decision"
+            body = b'{"id": "0", "decision": "quarantine"}'
+            req = Request(
+                url,
+                data=body,
+                headers={"Content-Type": "application/json", "X-Blurscan-Token": state.token},
+            )
+            with urlopen(req) as resp:  # noqa: S310 - loopback test server
+                assert resp.status == 200
+        finally:
+            server.shutdown()
+            thread.join(timeout=5)
+
+    # The decision was committed and is visible to a freshly opened store.
+    with DecisionStore(db) as reopened:
+        assert reopened.load() == {str(img): "quarantine"}
