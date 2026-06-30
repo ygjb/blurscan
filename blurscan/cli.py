@@ -12,6 +12,7 @@ import json
 import sys
 from pathlib import Path
 
+from blurscan.actions.quarantine import quarantine
 from blurscan.actions.report import write_report
 from blurscan.detectors import available
 from blurscan.models import BLURRY, BORDERLINE, SHARP, ImageResult, ScanConfig
@@ -65,6 +66,21 @@ def build_parser() -> argparse.ArgumentParser:
     out.add_argument("--report", metavar="PATH", help="Write CSV + HTML report to PATH.{csv,html}.")
     out.add_argument("--json", action="store_true", help="Emit results as JSON to stdout.")
     out.add_argument("-v", "--verbose", action="store_true", help="List every flagged image.")
+
+    actions = parser.add_argument_group("actions")
+    quar = actions.add_mutually_exclusive_group()
+    quar.add_argument("--copy", metavar="DIR", help="Copy flagged images to DIR (reversible).")
+    quar.add_argument("--move", metavar="DIR", help="Move flagged images to DIR.")
+    actions.add_argument(
+        "--include-borderline",
+        action="store_true",
+        help="Also quarantine borderline images (default: blurry only).",
+    )
+    actions.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Show what actions would do without changing any files.",
+    )
     return parser
 
 
@@ -126,6 +142,21 @@ def main(argv: list[str] | None = None) -> int:
     if args.report:
         csv_path, html_path = write_report(results, args.report)
         print(f"Wrote {csv_path} and {html_path}")
+    if args.copy or args.move:
+        dest = args.move or args.copy
+        actions = quarantine(
+            results,
+            dest,
+            move=bool(args.move),
+            dry_run=args.dry_run,
+            include_borderline=args.include_borderline,
+        )
+        verb = "move" if args.move else "copy"
+        prefix = "[dry-run] would " if args.dry_run else ""
+        print(f"{prefix}{verb} {len(actions)} flagged image(s) to {dest}")
+        if args.verbose or args.dry_run:
+            for a in actions:
+                print(f"  {a.src} -> {a.dst}")
     return 0
 
 
