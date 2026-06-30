@@ -16,6 +16,7 @@ dependencies = [
   "pillow>=10.0",
   "pillow-heif>=0.13",
   "rawpy>=0.18",
+  "flask>=3.0",
 ]
 
 [project.optional-dependencies]

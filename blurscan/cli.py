@@ -14,6 +14,7 @@ from pathlib import Path
 
 from blurscan.actions.quarantine import quarantine
 from blurscan.actions.report import write_report
+from blurscan.actions.review.server import serve
 from blurscan.actions.tag import ExiftoolNotFound, tag
 from blurscan.detectors import available
 from blurscan.models import BLURRY, BORDERLINE, SHARP, ImageResult, ScanConfig
@@ -104,6 +105,13 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Show what actions would do without changing any files.",
     )
+
+    review = parser.add_argument_group("review")
+    review.add_argument("--review", action="store_true", help="Launch the local web review UI.")
+    review.add_argument("--port", type=int, default=0, help="Review server port (default: auto).")
+    review.add_argument(
+        "--no-open", action="store_true", help="Do not open a browser for --review."
+    )
     return parser
 
 
@@ -118,6 +126,7 @@ def _config_from_args(args: argparse.Namespace) -> ScanConfig:
         raw_full=args.raw_full,
         use_cache=not args.no_cache,
         jobs=args.jobs,
+        dry_run=args.dry_run,
     )
 
 
@@ -156,7 +165,12 @@ def main(argv: list[str] | None = None) -> int:
         print(f"error: not a directory: {scan_path}", file=sys.stderr)
         return 2
 
-    results = run_scan(_config_from_args(args))
+    cfg = _config_from_args(args)
+    results = run_scan(cfg)
+
+    if args.review:
+        serve(results, cfg, port=args.port, open_browser=not args.no_open)
+        return 0
 
     if args.json:
         json.dump([r.to_dict() for r in results], sys.stdout, indent=2)

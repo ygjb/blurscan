@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>blurscan review</title>
+  <style>
+    body { font: 14px system-ui, sans-serif; margin: 2rem; color: #1f2328; }
+    code { background: #eaeef2; padding: 1px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>blurscan review</h1>
+  <p>Server is running. The interactive gallery UI lands in issue #16.</p>
+  <p>API: <code>GET /api/results</code> · <code>/api/thumb/&lt;id&gt;</code> ·
+     <code>/api/image/&lt;id&gt;</code> · <code>POST /api/decision</code> ·
+     <code>/api/apply</code> · <code>/api/shutdown</code></p>
+  <pre id="summary">loading…</pre>
+  <script>
+    fetch('/api/results').then(r => r.json()).then(d => {
+      const counts = {};
+      for (const it of d.items) counts[it.classification] = (counts[it.classification] || 0) + 1;
+      document.getElementById('summary').textContent =
+        `${d.items.length} images — ` + JSON.stringify(counts) +
+        (d.dry_run ? '  (dry-run)' : '');
+    });
+  </script>
+</body>
+</html>
