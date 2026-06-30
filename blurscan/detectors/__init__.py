@@ -8,6 +8,7 @@ from __future__ import annotations
 
 # Import built-in detectors for their registration side effects.
 from blurscan.detectors import laplacian as _laplacian  # noqa: F401  (registers "laplacian")
+from blurscan.detectors import motion as _motion  # noqa: F401  (registers "motion")
 from blurscan.detectors.base import (
     Detector,
     DetectorScore,
