@@ -1,0 +1,204 @@
+# Corpus attribution
+
+All images sourced via Openverse (https://openverse.org). Each is credited below with its Creative-Commons / public-domain license. Reuse must follow the named license.
+
+- `blurry/45a72093786d0095.jpg` — "(Blurry Photo Series) 'Live' From The Presidio - Ford Edsel And Other Classic Cars" by raider3_anime — CC BY-NC 2.0 — https://www.flickr.com/photos/11711545@N02/4553394627
+- `blurry/9646cc8833415ae4.jpg` — "A somewhat blurry photo of me and, er, Kate Winslet. Sort of" by Ben Sutherland — CC BY 2.0 — https://www.flickr.com/photos/60179301@N00/2546673830
+- `blurry/9d5f06b8fa4759e9.jpg` — "Blurry photo of Eastern Red Bat" by FritzFlohrReynolds — CC BY-SA 2.0 — https://www.flickr.com/photos/81112662@N03/12755561785
+- `blurry/0cb7bf53b21a2ccc.jpg` — "(Blurry Photo Series) 'Live' From The Presidio - Ford Edsel And Other Classic Cars" by raider3_anime — CC BY-NC 2.0 — https://www.flickr.com/photos/11711545@N02/4553392841
+- `blurry/fd623f415bb06cf0.jpg` — "Blurry photo booth portrait of a little boy" by simpleinsomnia — CC BY 2.0 — https://www.flickr.com/photos/95329455@N02/24810370274
+- `blurry/2a1901cf9cf83b24.jpg` — "Blurry photo booth portrait of a little boy" by simpleinsomnia — CC BY 2.0 — https://www.flickr.com/photos/95329455@N02/25667072561
+- `blurry/5a0c07ea762e3c52.jpg` — "Blurry photo of David's office" by Zak Greant — CC BY 2.0 — https://www.flickr.com/photos/91083986@N00/140920999
+- `blurry/b4e508c08af59dfd.jpg` — "Blurry photo of ork deployment" by jon_a_ross — CC BY-ND 2.0 — https://www.flickr.com/photos/8950560@N08/4500689107
+- `blurry/d943c460fdc003d3.jpg` — "(Blurry Photo Series) 'Live' From The Presidio - Ford Edsel And Other Classic Cars" by raider3_anime — CC BY-NC 2.0 — https://www.flickr.com/photos/11711545@N02/4554027844
+- `blurry/7476e44699204978.jpg` — "(Blurry Photo Series) 'Live' From The Presidio - Ford Edsel And Other Classic Cars" by raider3_anime — CC BY-NC 2.0 — https://www.flickr.com/photos/11711545@N02/4554029478
+- `blurry/a28bc86df2f27df8.jpg` — "(Blurry Photo Series) 'Live' From The Presidio - Ford Edsel And Other Classic Cars" by raider3_anime — CC BY-NC 2.0 — https://www.flickr.com/photos/11711545@N02/4553393711
+- `blurry/7ef8970ad30f50a2.jpg` — "A blurry photo of the Øresund bridge - DSCN4071" by Lars Plougmann — CC BY-SA 2.0 — https://www.flickr.com/photos/75062596@N00/164878172
+- `blurry/77470c30f23d44cb.jpg` — "Blurry photo of lights in the distance" by Ivan Radic — CC BY 2.0 — https://www.flickr.com/photos/26344495@N05/26496039183
+- `blurry/e9842fa3a454635a.jpg` — "Best blurry photo ever -- I love how it looks like an impressionist painting." by dfinney23 — CC BY-NC 2.0 — https://www.flickr.com/photos/26660977@N07/10579194963
+- `blurry/3182a71883c5f177.jpg` — "Blurry Photo at our 21st Century Website New Media BC Presentation" by roland — CC CC0 1.0 — https://www.flickr.com/photos/35034347371@N01/1563089
+- `blurry/bb79f45aa2a7c710.jpg` — "A Blurry Photo Of The Kids Climbing The Ship" by Joe Shlabotnik — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/40646519@N00/15320381548
+- `blurry/990b28f733786a20.jpg` — "love your i'm not quite sure what this 'blurry photo taken while bicycling' is but I love it! 20141128_202433" by roland — CC BY 2.0 — https://www.flickr.com/photos/35034347371@N01/15716662609
+- `blurry/41958f5a3ea3e932.jpg` — "Sorry. Another blurry photo." by John Morton — CC BY-SA 2.0 — https://www.flickr.com/photos/51035730365@N01/323023354
+- `blurry/bc32f048463dee15.jpg` — "george looks good even in blurry photos!" by roland — CC CC0 1.0 — https://www.flickr.com/photos/35034347371@N01/34993094252
+- `blurry/4456b5ebaf184a6f.jpg` — "out of focus" by Tim Cummins — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/55785940@N00/52316549
+- `blurry/c5aef436b390a6fa.jpg` — "out of focus christmas lights" by David Locke1 — CC BY 2.0 — https://www.flickr.com/photos/27036874@N04/3174003331
+- `blurry/88a320d5d5dfcbd6.jpg` — "Out of focus man made lights" by spectrumtextures — CC BY 2.0 — https://www.flickr.com/photos/51243257@N07/4709765925
+- `blurry/f3d9e7ae6a7787f7.jpg` — "In Focus/Out of focus" by Infomastern — CC BY-SA 2.0 — https://www.flickr.com/photos/55856449@N04/17126053114
+- `blurry/21554368ba5854c3.jpg` — "'You can't depend on your eyes when your imagination is out of focus.' Mark Twain" by Geraint Rowland Photography — CC BY-NC 2.0 — https://www.flickr.com/photos/33909206@N04/15958373183
+- `blurry/353984545ef3d245.jpg` — "Out of Focus" by Sergiu Bacioiu — CC BY-NC 2.0 — https://www.flickr.com/photos/31191642@N05/4112034449
+- `blurry/4b606423f0e15dbf.jpg` — "Out of focus 失焦" by Mr.Sai — CC BY-ND 2.0 — https://www.flickr.com/photos/92894934@N08/26635992088
+- `blurry/88bf5cf3dca4582e.jpg` — "Disney - Mickey Mouse Slightly Out Of Focus - Black & White" by Express Monorail — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/23322134@N02/2751325114
+- `blurry/7086f6830c749853.jpg` — "Shallow Focus or Out of Focus (Day 36 of 366)" by Au Kirk — CC BY 2.0 — https://www.flickr.com/photos/64441474@N06/24491926313
+- `blurry/b1d260cb18d4deaf.jpg` — "Out of focus" by Fitzrovia — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/26417989@N00/8415439984
+- `blurry/09b46b9036d32e67.jpg` — "Out Of Focus Queen Sabine" by Sabine Mondestin — CC BY 2.0 — https://www.flickr.com/photos/12932354@N05/14273973433
+- `blurry/e0fd4357872361d2.jpg` — "Out of Focus" by Sergiu Bacioiu — CC BY-NC 2.0 — https://www.flickr.com/photos/31191642@N05/3943799251
+- `blurry/a2f6170989faec16.jpg` — "out of focus" by gato-gato-gato — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/8868875@N03/13733907865
+- `blurry/296a2b363f69f876.jpg` — "Out of time, out of focus" by Jim Davies — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/39526605@N00/27800528823
+- `blurry/1da739fefddce20a.jpg` — "'Tis the Season for Colourful out of Focus Subjects" by Billy Wilson Photography — CC BY-NC 2.0 — https://www.flickr.com/photos/32132568@N06/4217089585
+- `blurry/ddc6a929caccab00.jpg` — "Out of focus area test" by Henry Söderlund — CC BY 2.0 — https://www.flickr.com/photos/46563758@N04/12795734265
+- `blurry/7f2c88f46d40faa1.jpg` — "Spring is out of focus" by Jano De Cesare — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/27443110@N07/3347334073
+- `blurry/396c4dd353e321f5.jpg` — "out of focus" by arrowlili — CC BY 2.0 — https://www.flickr.com/photos/52298140@N06/8467310257
+- `blurry/62fc8372f09454b6.jpg` — "To go along with the last image I posted of the “fist”, this is now with the focus shifted to the face. I think the combination of the two woks well. The impactfulness of the fist and in contrast, the out of focus fist. They both tell a story, they bot" by jaredpolin — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/28815288@N06/33626718121
+- `blurry/fd2fd9bb3bccb50f.jpg` — "Out of focus :(" by San Diego Shooter — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/19953384@N00/30365531865
+- `blurry/24c98e55bfb67733.jpg` — "out of focus" by Baciliforme — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/82055474@N00/605536587
+- `blurry/a70bb93a974de2a1.jpg` — "Focus & Out of Focus" by NJ.. — CC BY 2.0 — https://www.flickr.com/photos/10209031@N08/4505109936
+- `blurry/bc171f6061923faf.jpg` — "Hidden Circles: In and Out of Focus" by brdparker — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/67861823@N00/13293543983
+- `blurry/5c809e922416ea53.jpg` — "grass motion blur wallpaper" by .robbie — CC BY-NC 2.0 — https://www.flickr.com/photos/14821912@N00/2574427997
+- `blurry/e313c2459f80d0c7.jpg` — "Motion blur" by zeus1642 — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/39783687@N02/4456881145
+- `blurry/01c53b2921e95f6c.jpg` — "Motion Blur Tulips" by robin ... — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/7643570@N04/7039192015
+- `blurry/e327985108c9ab32.jpg` — "Motion Blur" by wishymom (Stephanie Wallace Photography) — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/59105317@N00/869703491
+- `blurry/ec69d67e1120d625.jpg` — "motion blur" by KirkOls — CC BY 2.0 — https://www.flickr.com/photos/39175939@N00/4043823745
+- `blurry/9857f88d3ffa62d9.jpg` — "Toddler motion blur" by Ruth and Dave — CC BY 2.0 — https://www.flickr.com/photos/95142644@N00/7331360442
+- `blurry/571cac340c2a2543.jpg` — "Spinning Motion Blur" by Creativity+ Timothy K Hamilton — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/22017189@N00/3663246205
+- `blurry/81f61f367cd977b4.jpg` — "Dog racing - motion blurred" by .craig — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/98882751@N00/2759448841
+- `blurry/d7a849cf9aa66655.jpg` — "New York Relays - Track and Field - Motion Blur" by Steven Pisano — CC BY 2.0 — https://www.flickr.com/photos/45776673@N04/17029978299
+- `blurry/24bde2eda3739265.jpg` — "Motion Blur 2 - 7/52" by KKfromBB — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/68968333@N06/8469937138
+- `blurry/072672ab2dd56ed2.jpg` — "Motion Blur Wallpaper" by Erik Pitti — CC BY-SA 2.0 — https://www.flickr.com/photos/24205142@N00/874046207
+- `blurry/0a2140ca10858fb6.jpg` — "Abstract motion blur" by Johan G — CC BY 2.0 — https://www.flickr.com/photos/58187590@N02/6264295474
+- `blurry/233a7331c5253dc8.jpg` — "Kong Motion Blur" by Trostle — CC BY 2.0 — https://www.flickr.com/photos/42183150@N00/6623778061
+- `blurry/f7bd096c5f3182ed.jpg` — "Sandhill Crane (Grus canadensis) in flight at dawn using a slow shutter speed to create a motion blur, Gibbon, Nebraska" by diana_robinson — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/62501682@N00/33625965236
+- `blurry/794af79bef52d5cb.jpg` — "Staines Crusader Seddon Pennine VI - Plaxton, SVX538K and camera shake in blustery conditions 1978" by sludgegulper — CC BY-SA 2.0 — https://www.flickr.com/photos/28179929@N08/3125865155
+- `blurry/449b97c93d8d7a44.jpg` — "Sirius Camera Shake" by Kevin M. Gill — CC BY 2.0 — https://www.flickr.com/photos/53460575@N03/32600875835
+- `blurry/1cd159cae0991e69.jpg` — "Big Dipper, Polaris, etc (camera shake): 30 sec at ƒ/3.5 ISO 1600, 10 mm" by Chris Devers — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/9161595@N03/9439435409
+- `blurry/6974a815c91091f3.jpg` — "If I look tired it is because I AM (the blur is courtesy of good ol' camera shake)" by Crystl — CC BY 2.0 — https://www.flickr.com/photos/10953991@N00/35497594
+- `blurry/90873317cfa184ce.jpg` — "Camera shake" by hmclin — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/95014738@N00/388514320
+- `blurry/204f60941e25099a.jpg` — "Ooops camera shake 14" by tomylees — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/71256895@N00/5451824928
+- `blurry/28d1e77bd18cb9fa.jpg` — "Camera shake/sunset" by tenugui — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/29769039@N02/18578507704
+- `blurry/073bd0408c5b116e.jpg` — "camera shake" by Danielle Scott — CC BY-SA 2.0 — https://www.flickr.com/photos/80901997@N00/6534983911
+- `blurry/3144c938d7f03d7b.jpg` — "skycrane: double-exposure or camera shake?" by arellis49 — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/93119419@N00/2455673435
+- `blurry/7438e5de18fe38b2.jpg` — "Camera assistant = camera shake" by mm-j — CC BY-NC 2.0 — https://www.flickr.com/photos/49132213@N00/1691441034
+- `blurry/48bb0cc1ea53b49d.jpg` — "Night shot - camera shake" by _vikram — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/93927811@N00/152361752
+- `blurry/533ff5ff00c8db38.jpg` — "7800°Fahrenheit,heat haze,camera shake..." by ARTS_fox1fire — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/46976402@N05/40481976343
+- `blurry/858ae7f97ab53466.jpg` — "The nice thing about camera shake..." by apurdam (Andrew) — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/56707737@N00/1238760787
+- `blurry/09cd1b3b06bca74b.jpg` — "Blur lights of the Canal" by Philou.cn — CC BY-SA 2.0 — https://www.flickr.com/photos/37574471@N00/2462550872
+- `blurry/80d2758eb101598a.jpg` — "Webtreats Tileable Light Blurs and Abstract Circle Patterns Gold 4" by webtreats — CC BY 2.0 — https://www.flickr.com/photos/44071822@N08/4994363266
+- `blurry/0deaaec67af9dc22.jpg` — "Blur" by mezzoblue — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/44124450371@N01/43185228
+- `blurry/f14184f39176462e.jpg` — "Webtreats Tileable Light Blurs and Abstract Circle Patterns 3" by webtreats — CC BY 2.0 — https://www.flickr.com/photos/44071822@N08/4430285700
+- `blurry/0e80a398beccc8df.jpg` — "Webtreats Tileable Light Blurs and Abstract Circle Patterns Red 1" by webtreats — CC BY 2.0 — https://www.flickr.com/photos/44071822@N08/4470784292
+- `blurry/7b319100c4be2dcb.jpg` — "Webtreats Tileable Light Blurs and Abstract Circle Patterns Bright Lights 3" by webtreats — CC BY 2.0 — https://www.flickr.com/photos/44071822@N08/4470005561
+- `blurry/4435592562024888.jpg` — "Blur-5" by maxmadesign.com — CC BY 2.0 — https://www.flickr.com/photos/97425966@N05/9135832565
+- `blurry/ced24c6026ab266a.jpg` — "Folklore NullElf: blurred mood ( #cc )" by marfis75 — CC BY 2.0 — https://www.flickr.com/photos/45409431@N00/6089815305
+- `blurry/510c71a1751d23d4.jpg` — "blur" by osde8info — CC BY-SA 2.0 — https://www.flickr.com/photos/8764442@N07/912268724
+- `blurry/f863e4ac7638cc45.jpg` — "blur" by Manchester-Monkey — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/38028723@N06/4150657215
+- `blurry/73dfa78ec4a5ff0e.jpg` — "Cycling Blur (London Town)" by Geraint Rowland Photography — CC BY-NC 2.0 — https://www.flickr.com/photos/33909206@N04/6382639031
+- `blurry/0cd898ae20f5ede4.jpg` — "Blur-2" by maxmadesign.com — CC BY 2.0 — https://www.flickr.com/photos/97425966@N05/9135832665
+- `blurry/bbaaf30283dd254d.jpg` — "Bar 001 blur" by mu523 — CC BY 2.0 — https://www.flickr.com/photos/64184059@N08/5839869456
+- `blurry/d463a14aa58ebe2a.jpg` — "blur" by TJPainter — CC BY 2.0 — https://www.flickr.com/photos/43759475@N04/4173242747
+- `blurry/a4b39b08afa0217f.jpg` — "#blur #nightphotography" by 'Olivier Jules' — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/28132554@N00/39754877212
+- `blurry/fab674f1b103b446.jpg` — "#blur #motion" by 'Olivier Jules' — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/28132554@N00/24419600817
+- `blurry/ab7602740b8c5da1.jpg` — "Blur" by Marc-Anthony Macon — CC BY-SA 2.0 — https://www.flickr.com/photos/21397669@N02/13254063023
+- `blurry/8fc84459b6b429e5.jpg` — "Blurred Beauty" by Steve Crane — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/49503062604@N01/14967573660
+- `blurry/74ee791274c3d827.jpg` — "Blur" by Marc-Anthony Macon — CC BY-SA 2.0 — https://www.flickr.com/photos/21397669@N02/13254278334
+- `blurry/5b397ba38b31ce55.jpg` — "Blur" by Marc-Anthony Macon — CC BY-SA 2.0 — https://www.flickr.com/photos/21397669@N02/13253924135
+- `blurry/9091e52ad76b131f.jpg` — "Blur-1" by maxmadesign.com — CC BY 2.0 — https://www.flickr.com/photos/97425966@N05/9135832781
+- `blurry/329f538c3dfff9dd.jpg` — "Blur of Lights" by shaire productions — CC BY 2.0 — https://www.flickr.com/photos/9822107@N08/5266287967
+- `blurry/beb660b69e0f5e52.jpg` — "Blurred Lights, Dizzying Heights" by RobertFrancis — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/57001982@N00/522517468
+- `blurry/5cf359b6bba0aa85.jpg` — "blur" by shoothead — CC BY-ND 2.0 — https://www.flickr.com/photos/66621443@N00/5214375855
+- `blurry/f0f57a26c01987c7.jpg` — "Blur" by Klara_bella — CC BY-NC 2.0 — https://www.flickr.com/photos/63975171@N05/8342808661
+- `blurry/d7c438f0b4f5ad61.jpg` — "Blur-3" by maxmadesign.com — CC BY 2.0 — https://www.flickr.com/photos/97425966@N05/9135832595
+- `blurry/f9afa37e146c788e.jpg` — "blurred christmas lights" by Dominick Guzzo — CC BY 2.0 — https://www.flickr.com/photos/49782305@N02/5944632130
+- `blurry/df53b39e1aad2b26.jpg` — "Demonstration of pinlight array using monitor (defocused array without transparency)" by D Coetzee — CC CC0 1.0 — https://www.flickr.com/photos/29507259@N02/14664541797
+- `blurry/6d02df17001814f1.jpg` — "Defocused Jerusalem" by eliudrosales — CC BY-NC 2.0 — https://www.flickr.com/photos/29271939@N02/16031885077
+- `blurry/aa13a1e883213f7c.jpg` — "Defocusing NY" by Pensiero — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/63894760@N00/2294776270
+- `blurry/b3ae7ec8c758fd76.jpg` — "focused defocused" by luisVilanova — CC BY 2.0 — https://www.flickr.com/photos/32951050@N05/4233498238
+- `not_blurry/a77b9cf3249fa3b9.jpg` — "Saguaro Cactus at Camelback Mountain" by laszlo-photo — CC BY 2.0 — https://www.flickr.com/photos/40467171@N00/286757494
+- `not_blurry/176fd1a7f64bd661.jpg` — "Smoke over Hudson Bay" by NASA Goddard Photo and Video — CC BY 2.0 — https://www.flickr.com/photos/24662369@N07/9494969781
+- `not_blurry/5f7f2f6e8a02989f.jpg` — "The Teton" by Zach Dischner — CC BY 2.0 — https://www.flickr.com/photos/35557234@N07/8625031423
+- `not_blurry/4f6dde6d57dc9c96.jpg` — "Castle Combe" by _Hadock_ — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/7992704@N05/24998454853
+- `not_blurry/c4445bdcce8701b8.jpg` — "Elation" by andrew_byrne — CC BY 2.0 — https://www.flickr.com/photos/36732216@N03/5423435586
+- `not_blurry/4e38ddd9007d8bac.jpg` — "the unperturbed sheep ..." by David Kracht — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/57761648@N02/15116376386
+- `not_blurry/c84af5ec681b2d4d.jpg` — "Canary Islands" by NASA Goddard Photo and Video — CC BY 2.0 — https://www.flickr.com/photos/24662369@N07/6630087415
+- `not_blurry/a18f4acd0416b1e1.jpg` — "Bibury" by _Hadock_ — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/7992704@N05/26730786361
+- `not_blurry/2060ecdcb7580ea9.jpg` — "Goddard Interns Experience a Little Mars on Earth" by NASA Goddard Photo and Video — CC BY 2.0 — https://www.flickr.com/photos/24662369@N07/8185442812
+- `not_blurry/4243bf4a3489beae.jpg` — "Live In The Present, Not The Past, Niether The Future" by Harry Thomas Photography — CC BY 2.0 — https://www.flickr.com/photos/84598277@N08/9336682803
+- `not_blurry/1c566f68ffba96ed.jpg` — "mist" by paul bica — CC BY 2.0 — https://www.flickr.com/photos/99771506@N00/5539886598
+- `not_blurry/54e29d91d85ad1fc.jpg` — "Where the Sky is Torn Asunder" by Trey Ratcliff — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/95572727@N00/4105054854
+- `not_blurry/3a24cd3cd5c942f4.jpg` — "Beginning the trek to Fitz Roy on the edge of Chile" by Trey Ratcliff — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/95572727@N00/3405013981
+- `not_blurry/c2baf0d19a03f7dd.jpg` — "49/365" by krystian_o — CC BY 2.0 — https://www.flickr.com/photos/44667304@N02/5082436845
+- `not_blurry/d9c9f5829dc3a4c9.jpg` — "'In the Glade a Light was Seen' - Tall Trees & Forest Light" by Moose Winans — CC BY-NC 2.0 — https://www.flickr.com/photos/91164391@N05/11465350003
+- `not_blurry/b4f6726c7cb505e9.jpg` — "Goddard Interns Experience a Little Mars on Earth" by NASA Goddard Photo and Video — CC BY 2.0 — https://www.flickr.com/photos/24662369@N07/8185443826
+- `not_blurry/43cada2493a8b75f.jpg` — "Sunset over Florence at Piazza Michelangelo" by jiuguangw — CC BY-SA 2.0 — https://www.flickr.com/photos/32366606@N00/5135522824
+- `not_blurry/af7c78e579b38c5b.jpg` — "Bokeh Schmokeh Fish Cart (36810028)" by Fadzly @ Shutterhack — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/9352758@N04/3507443204
+- `not_blurry/b128a2588bc67e1e.jpg` — "Pedestrian Bridge HDR - Des Moines, Iowa (Project 50/50 - Week 16)" by w4nd3rl0st (InspiredinDesMoines) — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/40531740@N08/5585662892
+- `not_blurry/0e8180affee29d5a.jpg` — "Island and the Tree" by CVIja(x) — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/191441905@N04/52285114213
+- `not_blurry/c73519167782b7dd.jpg` — "New Time Zone-Still No Friends" by Zach Dischner — CC BY 2.0 — https://www.flickr.com/photos/35557234@N07/5656303960
+- `not_blurry/b1de8f85c0f4f0c5.jpg` — "Water Fall" by Jeff Power — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/24379591@N03/2974955356
+- `not_blurry/eeb488247feb3d0a.jpg` — "Milky Way over Rainier" by [nosamk] KMason photography — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/8519118@N06/8498104278
+- `not_blurry/6875dfc992502346.jpg` — "Goddard Interns Experience a Little Mars on Earth" by NASA Goddard Photo and Video — CC BY 2.0 — https://www.flickr.com/photos/24662369@N07/8185443534
+- `not_blurry/c1191ab8f4ced5c5.jpg` — "Focusing the 100-millimeter Mastcam" by NASA Goddard Photo and Video — CC BY 2.0 — https://www.flickr.com/photos/24662369@N07/7881867606
+- `not_blurry/f0db04af46099182.jpg` — "A Razor to the Sky" by Trey Ratcliff — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/95572727@N00/3451156513
+- `not_blurry/1d03e2c83190c4a5.jpg` — "Tensegrity @ Joslyn Art Museum Omaha, NE" by shannonpatrick17 — CC BY 2.0 — https://www.flickr.com/photos/10799351@N00/3312943639
+- `not_blurry/a8bda4b149b8ce48.jpg` — "The Wave of Coyote Buttes" by San Diego Shooter — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/19953384@N00/4557609499
+- `not_blurry/2782ed9a979b3a4d.jpg` — "Oneonta Gorge" by JonoMueller — CC BY 2.0 — https://www.flickr.com/photos/45939540@N05/5891809300
+- `not_blurry/6a6555e09ce9eb37.jpg` — "Footbridge over West Waddell Creek, Big Basin State Park" by tychay — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/79053562@N00/77400398
+- `not_blurry/059b5ef7575cec31.jpg` — "Macro Photography - Colour Pencils" by Tasumi1968 — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/85001226@N00/396209126
+- `not_blurry/5a4e012daa5a2323.jpg` — "Macro Photography - Cadbury Dark Chocolate" by Tasumi1968 — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/85001226@N00/396206941
+- `not_blurry/83dec78a0cbb3b5d.jpg` — "Exploring macro photography" by Fr@ηk — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/56936646@N07/31466006677
+- `not_blurry/ad3041fdc426974d.jpg` — "Flower (Macro Photography)" by Rodrigo Soldon Souza — CC BY-ND 2.0 — https://www.flickr.com/photos/9783357@N08/6750894083
+- `not_blurry/d8e6547e790abe1e.jpg` — "Macro Photography - Rambutan Fruit" by Tasumi1968 — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/85001226@N00/396208440
+- `not_blurry/4b1ba2f4079fa97c.jpg` — "Flower (Macro Photography)" by Rodrigo Soldon Souza — CC BY-ND 2.0 — https://www.flickr.com/photos/9783357@N08/6764995527
+- `not_blurry/c17f4458f157ff95.jpg` — "Snowflake macro photography 1" by Alexey Kljatov — CC BY-SA 4.0 — https://commons.wikimedia.org/w/index.php?curid=39993014
+- `not_blurry/fb97c8703ee58641.jpg` — "Macro Photography with Canon PowerShot S90" by Captain Kimo — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/32154460@N04/6459534301
+- `not_blurry/c1d1dd52dbe61448.jpg` — "My light kit for Macro Photography" by Bobokeh — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/100394809@N02/14873079401
+- `not_blurry/ea4b6a396f7a8b6e.jpg` — "Flower (Macro Photography)" by Rodrigo Soldon Souza — CC BY-ND 2.0 — https://www.flickr.com/photos/9783357@N08/6764746833
+- `not_blurry/a79ae7959d0be2b6.jpg` — "Lilium 8. Flower macro photography lily" by perlaroques — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/57666876@N08/6611829611
+- `not_blurry/86a9bd0dfaff44cf.jpg` — "My light kit for Macro Photography" by Bobokeh — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/100394809@N02/14689454570
+- `not_blurry/91b10cbc7a36eead.jpg` — "Macro Photography Workshop with Nadav Bagim" by Flavio~ — CC BY-NC 2.0 — https://www.flickr.com/photos/37873897@N06/8460746676
+- `not_blurry/3c10df791bb9696a.jpg` — "Iris Garden, Macro photography" by moonjazz — CC BY-SA 2.0 — https://www.flickr.com/photos/8398907@N02/47962363042
+- `not_blurry/5b28eb99f5b264f8.jpg` — "File:OK-button - Macro photography of a remote control.jpg" by Maximilian Schönherr — CC BY-SA 3.0 — https://commons.wikimedia.org/w/index.php?curid=30080122
+- `not_blurry/d54b875739f8732c.jpg` — "DSC_0521-1 naked no. 2 - macro photography" by Filip Patock — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/142841067@N07/49188950276
+- `not_blurry/3dec95d319811cd8.jpg` — "Fresco macro invernal -- Fresh winter macro photography [explored]" by Anxo Resúa — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/44761444@N03/6658377795
+- `not_blurry/55075826f29bd1d8.jpg` — "The world of macro photography" by Marc.van.Veen — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/50207459@N05/28334091168
+- `not_blurry/70a607fa201db1c9.jpg` — "flower macro photography." by Nupur Dasgupta — CC BY 2.0 — https://www.flickr.com/photos/48904977@N02/6136621936
+- `not_blurry/82153da92bb5f25f.jpg` — "Flower (Macro Photography)" by Rodrigo Soldon Souza — CC BY-ND 2.0 — https://www.flickr.com/photos/9783357@N08/6750886863
+- `not_blurry/c3b36e8bb65ca441.jpg` — "Flower (Macro Photography)" by Rodrigo Soldon Souza — CC BY-ND 2.0 — https://www.flickr.com/photos/9783357@N08/6764959505
+- `not_blurry/4f95aeb8f562ee34.jpg` — "A tea cup. -- Macro photography practice" by QuantFoto — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/30399796@N03/51710577403
+- `not_blurry/cf1226a6bcba28b1.jpg` — "DSC_0514 naked - macro photography" by Filip Patock — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/142841067@N07/49188333903
+- `not_blurry/a0b39b876ab0cd3b.jpg` — "Happy portrait" by @Doug88888 — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/29468339@N02/5746989996
+- `not_blurry/7f2cb813e3ccf8f3.jpg` — "Portrait" by Kuster & Wildhaber Photography — CC BY-ND 2.0 — https://www.flickr.com/photos/49253686@N04/6478892563
+- `not_blurry/76b43a8d3361d90d.jpg` — "Portrait 6" by sterre.vandenberge — CC BY 2.0 — https://www.flickr.com/photos/136445785@N08/24033740195
+- `not_blurry/b5420203652676f1.jpg` — "Man portrait" by @Doug88888 — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/29468339@N02/2955654946
+- `not_blurry/af3a0c9fe5d16dd6.jpg` — "Portrait of a Girl" by hellomatt — CC BY-SA 2.0 — https://www.flickr.com/photos/33609195@N00/3432147629
+- `not_blurry/66b34443ad2fbb15.jpg` — "Portrait photography" by James Willamor — CC BY-SA 2.0 — https://www.flickr.com/photos/81464596@N00/11423129055
+- `not_blurry/c8fd8d191e83c39e.jpg` — "Portrait" by Big Grey Mare — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/57565555@N00/3760126893
+- `not_blurry/b09eec193129d880.jpg` — "Portrait of my sister" by Robby Schulze — CC BY 2.0 — https://www.flickr.com/photos/66585662@N06/8791363560
+- `not_blurry/3febcc847fbd5454.jpg` — "Self Portrait" by Todd Kulesza — CC BY-SA 2.0 — https://www.flickr.com/photos/10198809@N08/1572810438
+- `not_blurry/cbc709f694da557f.jpg` — "Family Portrait" by Brandon Kunefke — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/13691686@N00/439320739
+- `not_blurry/8301747817ab0360.jpg` — "Portrait shot" by craig antony spence — CC BY 2.0 — https://www.flickr.com/photos/75606217@N05/8427266978
+- `not_blurry/515643bd24e6c639.jpg` — "mum portrait" by http://heatherbuckley.co.uk — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/9224879@N06/8277991862
+- `not_blurry/7b3171bf373c0e40.jpg` — "Portrait on our Distressed Steel Sheet by Jamie Green" by Metal Sheets Limited — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/90928791@N04/32630617984
+- `not_blurry/06ccdc3a6a02864b.jpg` — "#TwitterTuesday: Portrait | Strangers, friends, selfies, 365s -- the options are nearly endless. Tweet your favorite portrait from your Flickr account to @flickr and add #TwitterTuesday!" by Flickr — CC BY-ND 2.0 — https://www.flickr.com/photos/66956608@N06/13061926375
+- `not_blurry/43fa04525862a60e.jpg` — "portrait" by kaiteeteehee — CC BY-SA 2.0 — https://www.flickr.com/photos/92532726@N04/8488585806
+- `not_blurry/293fba097f4a3d26.jpg` — "portrait" by sangpengembara — CC BY 2.0 — https://www.flickr.com/photos/48071824@N02/4419910459
+- `not_blurry/2dce6fe7971cf46e.jpg` — "Portrait | KL Photographer" by Johnragai-Moment Catcher — CC BY 2.0 — https://www.flickr.com/photos/40642065@N06/16745348354
+- `not_blurry/730a1860f018f322.jpg` — "Portraits" by Krists Luhaers — CC BY 2.0 — https://www.flickr.com/photos/96459815@N03/15901706541
+- `not_blurry/02df1d0d94a556b9.jpg` — "Portraits" by Krists Luhaers — CC BY 2.0 — https://www.flickr.com/photos/96459815@N03/15281427534
+- `not_blurry/ebb646c44beb6541.jpg` — "Portrait" by Arturo Espinosa — CC BY-NC 2.0 — https://www.flickr.com/photos/40683483@N07/17206200390
+- `not_blurry/146bba54e5b2b70e.jpg` — "Portrait" by Big Grey Mare — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/57565555@N00/10157454785
+- `not_blurry/05b7bbc927bb08d5.jpg` — "Portraits" by Krists Luhaers — CC BY 2.0 — https://www.flickr.com/photos/96459815@N03/15281428434
+- `not_blurry/e28575991645cd86.jpg` — "portrait" by ilsiciliano_ — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/120615119@N03/14301216401
+- `not_blurry/aed1b5536676a5b7.jpg` — "Portrait" by Arturo Espinosa — CC BY-NC 2.0 — https://www.flickr.com/photos/40683483@N07/17395111185
+- `not_blurry/f3e0b08476a586fb.jpg` — "Portrait" by Uffdah!!! — CC BY-NC 2.0 — https://www.flickr.com/photos/10649748@N04/9847330033
+- `not_blurry/20f7fd4d4374e117.jpg` — "Portrait" by Ben Chen Photography — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/27497869@N04/28988467407
+- `not_blurry/a9a655890cbb78b4.jpg` — "Portrait" by Arturo Espinosa — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/40683483@N07/16101268440
+- `not_blurry/eeb18a6c3b4efe6a.jpg` — "Street Portrait #1" by Sushicam — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/21447632@N00/6543683445
+- `not_blurry/ccf34a8e6d4197ce.jpg` — "Get Pushed assignment: studio style portrait" by driek — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/52122658@N00/7420948556
+- `not_blurry/49271e4285030a39.jpg` — "Street Photography" by Nora Danbly — CC BY-NC-SA 2.0 — https://www.flickr.com/photos/60419542@N03/6818723552
+- `not_blurry/dfef47cb210147b8.jpg` — "Street Photography" by Imahinasyon Photography — CC BY 2.0 — https://www.flickr.com/photos/53884652@N03/5270125901
+- `not_blurry/0d758bc65cce280d.jpg` — "Street photography woman" by kevin dooley — CC BY 2.0 — https://www.flickr.com/photos/12836528@N00/7710389126
+- `not_blurry/a187222b3bb529d4.jpg` — "Street Photography" by Nicola Del Mutolo — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/52661950@N00/2349378477
+- `not_blurry/0f67ef30fd2d3403.jpg` — "Design Plaza - Seoul, South Korea - Black and white street photography" by Giuseppe Milo (www.pixael.com) — CC BY 2.0 — https://www.flickr.com/photos/87690240@N03/41521571691
+- `not_blurry/db3a5a52e8777fc9.jpg` — "Jump - Seoul, South Korea - Black and white street photography" by Giuseppe Milo (www.pixael.com) — CC BY 2.0 — https://www.flickr.com/photos/87690240@N03/40261880475
+- `not_blurry/714b918c246af83e.jpg` — "Hiroshima City Street Photography" by Imahinasyon Photography — CC BY 2.0 — https://www.flickr.com/photos/53884652@N03/5344503997
+- `not_blurry/1a5c1759e7e07a80.jpg` — "San Francisco, United States - Black and white street photography" by Giuseppe Milo (www.pixael.com) — CC BY 2.0 — https://www.flickr.com/photos/87690240@N03/17102843277
+- `not_blurry/bb3315f61192eeb0.jpg` — "Dublin airport, Ireland - Black and white street photography" by Giuseppe Milo (www.pixael.com) — CC BY 2.0 — https://www.flickr.com/photos/87690240@N03/17367410309
+- `not_blurry/9e5a69b89879c50e.jpg` — "And now I try street photography" by kevin dooley — CC BY 2.0 — https://www.flickr.com/photos/12836528@N00/2960685963
+- `not_blurry/f40e9d82ac94d840.jpg` — "Tokyo street photography" by kevin dooley — CC BY 2.0 — https://www.flickr.com/photos/12836528@N00/6990126445
+- `not_blurry/7f7dfaed77565a8c.jpg` — "Running - Dublin, Ireland - Black and white street photography" by Giuseppe Milo (www.pixael.com) — CC BY 2.0 — https://www.flickr.com/photos/87690240@N03/18113719782
+- `not_blurry/e5a1ad863aa14787.jpg` — "People make Glasgow - Black and white street photography" by Giuseppe Milo (www.pixael.com) — CC BY 2.0 — https://www.flickr.com/photos/87690240@N03/17067641787
+- `not_blurry/476edd18af4df7f7.jpg` — "Love - Oslo, Norway - Color street photography" by Giuseppe Milo (www.pixael.com) — CC BY 2.0 — https://www.flickr.com/photos/87690240@N03/20272200404
+- `not_blurry/08e20339d1926395.jpg` — "2011 Street Photography - 033 - EXPLORE" by Through Painted Eyes — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/55004633@N03/6008690332
+- `not_blurry/6b70417c895b4135.jpg` — "Serving dinner, Glasgow, Scotland - Street photography" by Giuseppe Milo (www.pixael.com) — CC BY 2.0 — https://www.flickr.com/photos/87690240@N03/17097394052
+- `not_blurry/acc9c58d10f98490.jpg` — "Kjeragbolten - Kjerag, Norway - Black and white street photography" by Giuseppe Milo (www.pixael.com) — CC BY 2.0 — https://www.flickr.com/photos/87690240@N03/20527717081
+- `not_blurry/8e9aa21409f285c6.jpg` — "architecture" by barnyz — CC BY-NC-ND 2.0 — https://www.flickr.com/photos/75487768@N04/28187028300

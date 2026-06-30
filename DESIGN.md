@@ -296,18 +296,18 @@ Performance / safety:
 
 ## 8. Testing strategy
 
-### 8.1 Two-tier fixtures (synthetic gates CI; real images validate locally)
-- **Synthetic, always-run (the CI gate):** programmatically generated images — a sharp
-  checkerboard vs. a Gaussian-blurred copy, a half-sharp/half-blurred frame — so the
-  merge gate never depends on any uncommitted file.
-- **Real labeled images, local-only:** a `test_samples/` directory (gitignored, **not**
-  committed) holding the user's own examples:
-  - `test_samples/blurry/` — every image expected to classify as **blurry**.
-  - `test_samples/not_blurry/` — every image expected to classify as **sharp**.
-  Tests over these are guarded with `@pytest.mark.skipif(...)` on the directory's
-  presence: they run during local development and **skip cleanly in CI** (where
-  `test_samples/` is absent). A shared `conftest.py` fixture discovers and yields the
-  labeled paths.
+### 8.1 Two-tier fixtures (synthetic + a tracked labeled corpus)
+- **Synthetic, always-run:** programmatically generated images — a sharp checkerboard
+  vs. a Gaussian-blurred copy, a half-sharp/half-blurred frame — covering core invariants
+  with zero external dependencies.
+- **Real labeled corpus (tracked in git):** a Creative-Commons image set committed under
+  `test_samples/web_corpus/{blurry,not_blurry}` (built by `scripts/build_corpus.py`, with
+  `manifest.csv` + `ATTRIBUTION.md`). Because it is committed, the real-image tests run in
+  **CI as well as locally**. A shared `conftest.py` discovers the labeled paths (web_corpus
+  first, legacy top-level layout as a fallback) and `pytest.skip`s only if no corpus is
+  present.
+  - Real-image assertions use a **ranking-quality** bar (median separation + ROC-AUC),
+    not perfect threshold separation, per the pluggable-method reality (§2.0).
 
 ### 8.2 Coverage
 - **Unit:** `metrics.py` against the synthetic images — order (sharp > blurred) and
