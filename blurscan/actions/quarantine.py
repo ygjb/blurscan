@@ -53,16 +53,23 @@ def quarantine(
     move: bool = False,
     dry_run: bool = False,
     include_borderline: bool = False,
+    filter_results: bool = True,
 ) -> list[QuarantineAction]:
-    """Copy/move flagged images into ``dest``. Returns the actions (planned if dry-run)."""
+    """Copy/move flagged images into ``dest``. Returns the actions (planned if dry-run).
+
+    ``filter_results`` (default True) applies the blurry/borderline classification
+    filter to ``results``. Pass ``filter_results=False`` to act on exactly the given
+    results — used by the review UI, where the user has already chosen each image
+    explicitly and that decision is authoritative.
+    """
     dest = Path(dest)
-    flagged = flagged_results(results, include_borderline)
-    if flagged and not dry_run:
+    targets = flagged_results(results, include_borderline) if filter_results else list(results)
+    if targets and not dry_run:
         dest.mkdir(parents=True, exist_ok=True)
 
     reserved: set[Path] = set()
     actions: list[QuarantineAction] = []
-    for r in flagged:
+    for r in targets:
         target = _unique_target(dest, r.path.name, reserved)
         reserved.add(target)
         actions.append(QuarantineAction(src=r.path, dst=target))

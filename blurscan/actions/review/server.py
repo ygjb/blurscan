@@ -180,7 +180,12 @@ def _apply_decisions(state: ReviewState) -> dict[str, Any]:
 
     if to_quarantine:
         dest = state.cfg.scan_path / "_blurscan_quarantine"
-        actions = quarantine(to_quarantine, dest, move=False, dry_run=state.cfg.dry_run)
+        # The user explicitly staged each of these, so honor the decision as-is
+        # rather than re-applying the classification filter (which would silently
+        # drop borderline/sharp/errored selections).
+        actions = quarantine(
+            to_quarantine, dest, move=False, dry_run=state.cfg.dry_run, filter_results=False
+        )
         summary["quarantined"] = len(actions)
     if to_tag:
         try:
