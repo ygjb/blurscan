@@ -62,6 +62,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Demosaic full RAW sensor data instead of the embedded preview.",
     )
+    detect.add_argument(
+        "--no-cache",
+        action="store_true",
+        help="Disable the on-disk result cache (re-score every file).",
+    )
 
     out = parser.add_argument_group("output")
     out.add_argument("--report", metavar="PATH", help="Write CSV + HTML report to PATH.{csv,html}.")
@@ -104,6 +109,7 @@ def _config_from_args(args: argparse.Namespace) -> ScanConfig:
         grid=args.grid,
         working_size=args.working_size,
         raw_full=args.raw_full,
+        use_cache=not args.no_cache,
     )
 
 

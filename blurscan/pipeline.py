@@ -10,6 +10,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 from pathlib import Path
 
+from blurscan.cache import ResultCache, default_cache_path
 from blurscan.classifier import classify_scores
 from blurscan.detectors import get
 from blurscan.detectors.base import Detector
@@ -66,9 +67,34 @@ def classify_results(
         result.classification = classification
 
 
+def _score_all(
+    cfg: ScanConfig, detector: Detector, cache: ResultCache | None
+) -> list[ImageResult]:
+    results: list[ImageResult] = []
+    for path in iter_image_paths(cfg):
+        cached = cache.get(path, cfg.method) if cache is not None else None
+        if cached is not None:
+            results.append(cached)
+            continue
+        result = score_path(path, detector, cfg)
+        if cache is not None and result.error is None:
+            cache.put(result)
+        results.append(result)
+    return results
+
+
 def run_scan(cfg: ScanConfig) -> list[ImageResult]:
-    """Run the full scan and return one :class:`ImageResult` per image."""
+    """Run the full scan and return one :class:`ImageResult` per image.
+
+    Scoring results are cached on disk (keyed on path+mtime+size+method) when
+    ``cfg.use_cache`` is set; classification is always recomputed from the run's
+    distribution.
+    """
     detector = get(cfg.method)
-    results = [score_path(path, detector, cfg) for path in iter_image_paths(cfg)]
+    if cfg.use_cache:
+        with ResultCache(default_cache_path(cfg.scan_path)) as cache:
+            results = _score_all(cfg, detector, cache)
+    else:
+        results = _score_all(cfg, detector, None)
     classify_results(results, detector, cfg)
     return results
