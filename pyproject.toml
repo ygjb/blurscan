@@ -24,12 +24,19 @@ dev = [
   "mypy>=1.8",
   "pytest>=8.0",
 ]
+ml = [
+  "torch>=2.0",
+  "torchvision>=0.15",
+]
 
 [project.scripts]
 blurscan = "blurscan.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["blurscan*"]
+
+[tool.setuptools.package-data]
+"blurscan.detectors" = ["*.npz"]
 
 [tool.ruff]
 line-length = 100
