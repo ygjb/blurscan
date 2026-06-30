@@ -2,7 +2,8 @@
 
 RAW files can't be synthesized at test time (rawpy decodes only), so the always-
 run tests cover registration and the error path. A real preview/full round-trip
-runs only if a local RAW fixture exists under ``test_samples/`` (skips in CI).
+runs against the reconstructed RAW corpus cache (``scripts/fetch_corpus.py``);
+skips when the cache is absent (e.g. CI).
 """
 
 from __future__ import annotations
@@ -13,14 +14,11 @@ import numpy as np
 import pytest
 
 from blurscan.loader import (
-    RAW_EXTENSIONS,
     ImageLoadError,
     is_supported,
     load_image,
     supported_extensions,
 )
-
-SAMPLES = Path(__file__).resolve().parent.parent / "test_samples"
 
 
 def test_raw_extensions_supported() -> None:
@@ -36,20 +34,10 @@ def test_corrupt_raw_raises(tmp_path: Path) -> None:
         load_image(bad)
 
 
-def _find_raw() -> Path | None:
-    if not SAMPLES.is_dir():
-        return None
-    for p in SAMPLES.rglob("*"):
-        if p.is_file() and p.suffix.lower() in RAW_EXTENSIONS:
-            return p
-    return None
-
-
-def test_raw_preview_and_full_roundtrip() -> None:
-    raw = _find_raw()
-    if raw is None:
-        pytest.skip("no local RAW fixture under test_samples/")
-    preview = load_image(raw, raw_full=False)
-    assert preview.dtype == np.uint8 and preview.ndim == 3 and preview.shape[2] == 3
-    full = load_image(raw, raw_full=True)
-    assert full.ndim == 3 and full.shape[2] == 3
+def test_raw_preview_and_full_roundtrip(raw_corpus_files: list[Path]) -> None:
+    # Exercise every reconstructed RAW fixture in both decode modes (TESTING §6).
+    for raw in raw_corpus_files:
+        preview = load_image(raw, raw_full=False)
+        assert preview.dtype == np.uint8 and preview.ndim == 3 and preview.shape[2] == 3
+        full = load_image(raw, raw_full=True)
+        assert full.ndim == 3 and full.shape[2] == 3

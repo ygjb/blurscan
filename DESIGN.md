@@ -300,12 +300,15 @@ Performance / safety:
 - **Synthetic, always-run:** programmatically generated images — a sharp checkerboard
   vs. a Gaussian-blurred copy, a half-sharp/half-blurred frame — covering core invariants
   with zero external dependencies.
-- **Real labeled corpus (tracked in git):** a Creative-Commons image set committed under
-  `test_samples/web_corpus/{blurry,not_blurry}` (built by `scripts/build_corpus.py`, with
-  `manifest.csv` + `ATTRIBUTION.md`). Because it is committed, the real-image tests run in
-  **CI as well as locally**. A shared `conftest.py` discovers the labeled paths (web_corpus
-  first, legacy top-level layout as a fallback) and `pytest.skip`s only if no corpus is
-  present.
+- **Real labeled corpus (download-on-demand):** Creative-Commons / public-domain image
+  sets described by committed *manifests* (`test_samples/{web_corpus,raw_corpus,heic_corpus}/
+  manifest.csv` + `ATTRIBUTION.md`) — the image bytes are **not** committed. Run
+  `python scripts/fetch_corpus.py` to reconstruct them into a gitignored cache
+  (`test_samples/_cache/`, override with `$BLURSCAN_CORPUS_CACHE`), verified by sha256
+  (HEIC is transcoded locally from the CC JPEGs). A shared `conftest.py` discovers the
+  cached paths and `pytest.skip`s when the cache is absent — so these tests run **locally
+  after a fetch** but skip on a fresh clone / in CI (which does not fetch, by design).
+  Manifests themselves are validated by always-run tests (`test_corpus_manifest.py`).
   - Real-image assertions use a **ranking-quality** bar (median separation + ROC-AUC),
     not perfect threshold separation, per the pluggable-method reality (§2.0).
 
