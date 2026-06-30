@@ -150,8 +150,9 @@ blurscan "$TC" --method ml -v
 ```
 
 - [ ] If torch/torchvision are installed: runs and produces scores in the **0–100** range.
-- [ ] If `[ml]` is **not** installed: `ml` is not even offered as a `--method` choice
-  (argparse error) — confirming the optional dependency gating.
+- [ ] If `[ml]` is **not** installed: `ml` is still a `--method` choice, but running it
+  prints a single-line `error: the 'ml' method needs torch + torchvision — install with
+  pip install blurscan[ml]` and exits **4** — **no traceback**.
 
 ---
 
